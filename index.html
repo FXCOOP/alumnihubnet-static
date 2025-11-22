@@ -1,0 +1,1334 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlumniHub - קהילת בוגרי תיכון חדרה 2003</title>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Heebo', sans-serif;
+            background: #f5f7fa;
+            min-height: 100vh;
+        }
+
+        /* Layout */
+        .app-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 260px;
+            background: white;
+            border-left: 1px solid #e5e7eb;
+            position: fixed;
+            right: 0;
+            top: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            z-index: 100;
+        }
+
+        .sidebar-header {
+            padding: 24px;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .sidebar-header h1 {
+            font-size: 1.5rem;
+            color: #2563eb;
+            font-weight: 700;
+        }
+
+        .sidebar-header p {
+            font-size: 0.875rem;
+            color: #6b7280;
+            margin-top: 4px;
+        }
+
+        .sidebar-nav {
+            flex: 1;
+            padding: 16px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-radius: 8px;
+            color: #4b5563;
+            text-decoration: none;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .nav-link:hover {
+            background: #f3f4f6;
+        }
+
+        .nav-link.active {
+            background: #eff6ff;
+            color: #2563eb;
+            font-weight: 500;
+        }
+
+        .nav-link span:first-child {
+            font-size: 1.2rem;
+        }
+
+        .sidebar-footer {
+            padding: 16px;
+            border-top: 1px solid #f3f4f6;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            background: #dbeafe;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2563eb;
+            font-weight: 600;
+        }
+
+        .user-details {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .user-name {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #111827;
+        }
+
+        .user-email {
+            font-size: 0.75rem;
+            color: #6b7280;
+        }
+
+        .logout-btn {
+            background: none;
+            border: none;
+            color: #6b7280;
+            font-size: 0.875rem;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .logout-btn:hover {
+            color: #dc2626;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-right: 260px;
+            padding: 24px;
+        }
+
+        .content-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Page Header */
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .page-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #111827;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            font-family: inherit;
+            font-size: 0.875rem;
+        }
+
+        .btn-primary {
+            background: #2563eb;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
+        }
+
+        .btn-secondary {
+            background: #e5e7eb;
+            color: #374151;
+        }
+
+        .btn-secondary:hover {
+            background: #d1d5db;
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            margin-bottom: 16px;
+        }
+
+        /* Forms */
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 6px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.875rem;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .form-textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: left 10px center;
+            background-repeat: no-repeat;
+            background-size: 16px;
+            padding-left: 36px;
+        }
+
+        /* Badge */
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .badge-general {
+            background: #f3f4f6;
+            color: #374151;
+        }
+
+        .badge-opportunity {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .badge-question {
+            background: #e9d5ff;
+            color: #6b21a8;
+        }
+
+        /* Post */
+        .post-header {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .post-avatar {
+            width: 40px;
+            height: 40px;
+            background: #dbeafe;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2563eb;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        .post-meta {
+            flex: 1;
+        }
+
+        .post-author {
+            font-weight: 500;
+            color: #111827;
+        }
+
+        .post-role {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        .post-date {
+            font-size: 0.75rem;
+            color: #9ca3af;
+        }
+
+        .post-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #111827;
+        }
+
+        .post-content {
+            color: #4b5563;
+            line-height: 1.6;
+            white-space: pre-wrap;
+        }
+
+        /* Comments */
+        .comments-section {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid #f3f4f6;
+        }
+
+        .comment {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .comment-avatar {
+            width: 28px;
+            height: 28px;
+            background: #f3f4f6;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            color: #6b7280;
+        }
+
+        .comment-body {
+            flex: 1;
+            background: #f9fafb;
+            padding: 8px 12px;
+            border-radius: 8px;
+        }
+
+        .comment-author {
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .comment-text {
+            font-size: 0.875rem;
+            color: #4b5563;
+        }
+
+        .comment-input-wrapper {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .comment-input-wrapper .form-input {
+            flex: 1;
+        }
+
+        /* Event Card */
+        .event-card {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .event-info {
+            flex: 1;
+        }
+
+        .event-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #111827;
+        }
+
+        .event-creator {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        .event-datetime {
+            text-align: left;
+        }
+
+        .event-date {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #2563eb;
+        }
+
+        .event-time {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        .event-description {
+            color: #4b5563;
+            margin: 12px 0;
+        }
+
+        .event-location {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        .event-footer {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid #f3f4f6;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .event-attendees {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        .rsvp-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .rsvp-btn {
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            cursor: pointer;
+            border: none;
+            background: #f3f4f6;
+            color: #4b5563;
+            font-family: inherit;
+        }
+
+        .rsvp-btn.going {
+            background: #16a34a;
+            color: white;
+        }
+
+        .rsvp-btn.maybe {
+            background: #eab308;
+            color: white;
+        }
+
+        /* Business Card */
+        .business-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .business-name {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #111827;
+        }
+
+        .business-owner {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        .business-category {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .business-description {
+            color: #4b5563;
+            font-size: 0.875rem;
+            margin-bottom: 12px;
+        }
+
+        .business-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        .business-details a {
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        .business-details a:hover {
+            text-decoration: underline;
+        }
+
+        /* Grid */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 16px;
+            background: #f9fafb;
+            border-radius: 8px;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .stat-value.blue { color: #2563eb; }
+        .stat-value.green { color: #16a34a; }
+        .stat-value.purple { color: #9333ea; }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        /* Quick Links */
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .quick-link {
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            text-decoration: none;
+            color: inherit;
+            transition: box-shadow 0.2s;
+            cursor: pointer;
+        }
+
+        .quick-link:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .quick-link h3 {
+            font-size: 1rem;
+            margin-bottom: 4px;
+        }
+
+        .quick-link p {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        /* Messages */
+        .messages-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 16px;
+            height: 500px;
+        }
+
+        .threads-list {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .thread-item {
+            padding: 16px;
+            border-bottom: 1px solid #f3f4f6;
+            cursor: pointer;
+        }
+
+        .thread-item:hover {
+            background: #f9fafb;
+        }
+
+        .thread-item.active {
+            background: #eff6ff;
+        }
+
+        .thread-name {
+            font-weight: 500;
+        }
+
+        .thread-preview {
+            font-size: 0.875rem;
+            color: #6b7280;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .chat-container {
+            background: white;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 16px;
+            overflow-y: auto;
+        }
+
+        .message {
+            margin-bottom: 12px;
+            max-width: 70%;
+        }
+
+        .message.sent {
+            margin-right: auto;
+        }
+
+        .message.received {
+            margin-left: auto;
+        }
+
+        .message-bubble {
+            padding: 10px 14px;
+            border-radius: 12px;
+            font-size: 0.875rem;
+        }
+
+        .message.sent .message-bubble {
+            background: #2563eb;
+            color: white;
+        }
+
+        .message.received .message-bubble {
+            background: #f3f4f6;
+            color: #374151;
+        }
+
+        .message-time {
+            font-size: 0.75rem;
+            margin-top: 4px;
+        }
+
+        .message.sent .message-time {
+            color: #93c5fd;
+        }
+
+        .message.received .message-time {
+            color: #9ca3af;
+            text-align: left;
+        }
+
+        .chat-input {
+            padding: 16px;
+            border-top: 1px solid #f3f4f6;
+            display: flex;
+            gap: 8px;
+        }
+
+        .chat-input .form-input {
+            flex: 1;
+        }
+
+        /* Profile */
+        .profile-section {
+            margin-bottom: 24px;
+        }
+
+        .profile-section h2 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #111827;
+        }
+
+        .profile-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        /* Filter */
+        .filter-bar {
+            margin-bottom: 24px;
+        }
+
+        .filter-bar .form-select {
+            max-width: 250px;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #6b7280;
+        }
+
+        /* Footer */
+        .footer {
+            margin-right: 260px;
+            padding: 16px;
+            background: #f9fafb;
+            border-top: 1px solid #e5e7eb;
+            text-align: center;
+        }
+
+        .footer p {
+            font-size: 0.75rem;
+            color: #6b7280;
+        }
+
+        .footer a {
+            color: #6b7280;
+            text-decoration: underline;
+        }
+
+        /* Mobile */
+        .mobile-menu-btn {
+            display: none;
+            position: fixed;
+            top: 16px;
+            right: 16px;
+            z-index: 200;
+            background: white;
+            border: none;
+            padding: 8px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 90;
+        }
+
+        @media (max-width: 1024px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .sidebar {
+                transform: translateX(100%);
+                transition: transform 0.3s;
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .overlay.open {
+                display: block;
+            }
+
+            .main-content {
+                margin-right: 0;
+                padding-top: 60px;
+            }
+
+            .footer {
+                margin-right: 0;
+            }
+
+            .grid-2,
+            .quick-links,
+            .messages-container {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .event-card {
+                flex-direction: column;
+            }
+
+            .event-datetime {
+                text-align: right;
+            }
+        }
+
+        /* Pages - hide all by default */
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <button class="mobile-menu-btn" onclick="toggleSidebar()">☰</button>
+    <div class="overlay" onclick="toggleSidebar()"></div>
+
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1>AlumniHub</h1>
+                <p>תיכון חדרה 2003</p>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a class="nav-link active" onclick="showPage('feed')">
+                    <span>📰</span>
+                    <span>פיד</span>
+                </a>
+                <a class="nav-link" onclick="showPage('batch')">
+                    <span>🎓</span>
+                    <span>המחזור שלי</span>
+                </a>
+                <a class="nav-link" onclick="showPage('events')">
+                    <span>📅</span>
+                    <span>אירועים</span>
+                </a>
+                <a class="nav-link" onclick="showPage('directory')">
+                    <span>💼</span>
+                    <span>מדריך עסקים</span>
+                </a>
+                <a class="nav-link" onclick="showPage('messages')">
+                    <span>💬</span>
+                    <span>הודעות</span>
+                </a>
+                <a class="nav-link" onclick="showPage('profile')">
+                    <span>👤</span>
+                    <span>הפרופיל שלי</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <div class="user-avatar">דכ</div>
+                    <div class="user-details">
+                        <div class="user-name">דוד כהן</div>
+                        <div class="user-email">david@example.com</div>
+                    </div>
+                </div>
+                <button class="logout-btn">התנתקות</button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="content-wrapper">
+
+                <!-- Feed Page -->
+                <div id="page-feed" class="page active">
+                    <div class="page-header">
+                        <h1 class="page-title">פיד המחזור</h1>
+                        <button class="btn btn-primary" onclick="togglePostForm()">פוסט חדש</button>
+                    </div>
+
+                    <!-- New Post Form (hidden by default) -->
+                    <div id="new-post-form" class="card" style="display: none;">
+                        <div class="form-group">
+                            <label class="form-label">סוג</label>
+                            <select class="form-input form-select">
+                                <option value="general">כללי</option>
+                                <option value="opportunity">הזדמנות</option>
+                                <option value="question">שאלה</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">כותרת</label>
+                            <input type="text" class="form-input" placeholder="כותרת הפוסט">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">תוכן</label>
+                            <textarea class="form-input form-textarea" placeholder="מה תרצה לשתף?"></textarea>
+                        </div>
+                        <button class="btn btn-primary">פרסום</button>
+                    </div>
+
+                    <!-- Posts -->
+                    <div class="card">
+                        <div class="post-header">
+                            <div class="post-avatar">רל</div>
+                            <div class="post-meta">
+                                <div>
+                                    <span class="post-author">רונית לוי</span>
+                                    <span class="badge badge-opportunity">הזדמנות</span>
+                                </div>
+                                <div class="post-role">סמנכ"לית שיווק</div>
+                            </div>
+                            <span class="post-date">היום</span>
+                        </div>
+                        <h3 class="post-title">מחפשת מפתח/ת Full-Stack לסטארטאפ</h3>
+                        <p class="post-content">היי לכולם! 👋
+
+אנחנו בסטארטאפ בתחום ה-FinTech מחפשים מפתח/ת Full-Stack עם ניסיון של 3+ שנים.
+
+דרישות:
+- React / Next.js
+- Node.js
+- PostgreSQL
+- ניסיון עם AWS
+
+אם מישהו מכם מתעניין או מכיר מישהו מתאים - שלחו לי הודעה פרטית!</p>
+
+                        <div class="comments-section">
+                            <div class="comment">
+                                <div class="comment-avatar">יכ</div>
+                                <div class="comment-body">
+                                    <span class="comment-author">יוסי כהן</span>
+                                    <p class="comment-text">שלחתי לך פרטים בהודעה!</p>
+                                </div>
+                            </div>
+                            <div class="comment-input-wrapper">
+                                <input type="text" class="form-input" placeholder="הוסף תגובה...">
+                                <button class="btn btn-secondary">שלח</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="post-header">
+                            <div class="post-avatar">מש</div>
+                            <div class="post-meta">
+                                <div>
+                                    <span class="post-author">מיכל שמעון</span>
+                                    <span class="badge badge-general">כללי</span>
+                                </div>
+                                <div class="post-role">עורכת דין</div>
+                            </div>
+                            <span class="post-date">אתמול</span>
+                        </div>
+                        <h3 class="post-title">מי מגיע למפגש בתל אביב?</h3>
+                        <p class="post-content">שמעתי שמתכננים מפגש מחזור בחודש הבא - מי כבר אישר הגעה?
+
+כמה זמן לא נפגשנו כולנו ביחד! 🎉</p>
+
+                        <div class="comments-section">
+                            <div class="comment-input-wrapper">
+                                <input type="text" class="form-input" placeholder="הוסף תגובה...">
+                                <button class="btn btn-secondary">שלח</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="post-header">
+                            <div class="post-avatar">אב</div>
+                            <div class="post-meta">
+                                <div>
+                                    <span class="post-author">אורי בן-דוד</span>
+                                    <span class="badge badge-question">שאלה</span>
+                                </div>
+                                <div class="post-role">יועץ עסקי</div>
+                            </div>
+                            <span class="post-date">לפני 3 ימים</span>
+                        </div>
+                        <h3 class="post-title">המלצה על רואה חשבון?</h3>
+                        <p class="post-content">מישהו יכול להמליץ על רואה חשבון טוב לעסק קטן? מחפש מישהו עם ניסיון בסטארטאפים.</p>
+
+                        <div class="comments-section">
+                            <div class="comment">
+                                <div class="comment-avatar">דכ</div>
+                                <div class="comment-body">
+                                    <span class="comment-author">דוד כהן</span>
+                                    <p class="comment-text">בדוק את שלומי במדריך העסקים - הוא מעולה!</p>
+                                </div>
+                            </div>
+                            <div class="comment-input-wrapper">
+                                <input type="text" class="form-input" placeholder="הוסף תגובה...">
+                                <button class="btn btn-secondary">שלח</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Batch Page -->
+                <div id="page-batch" class="page">
+                    <div class="card">
+                        <h1 class="page-title">מחזור חדרה 2003</h1>
+                        <p style="color: #6b7280; margin-top: 8px;">תיכון חדרה - חדרה</p>
+                        <p style="color: #4b5563; margin-top: 16px;">ברוכים הבאים לקהילת בוגרי תיכון חדרה מחזור 2003. כאן תוכלו להתחבר מחדש עם חברים, לשתף הזדמנויות מקצועיות, ולהשתתף באירועי מפגש.</p>
+
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-value blue">127</div>
+                                <div class="stat-label">חברים</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value green">45</div>
+                                <div class="stat-label">פוסטים</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value purple">8</div>
+                                <div class="stat-label">אירועים</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="quick-links">
+                        <div class="quick-link" onclick="showPage('feed')">
+                            <h3>📰 פיד המחזור</h3>
+                            <p>צפייה בפוסטים ועדכונים מחברי המחזור</p>
+                        </div>
+                        <div class="quick-link" onclick="showPage('events')">
+                            <h3>📅 אירועים</h3>
+                            <p>מפגשים ואירועי מחזור</p>
+                        </div>
+                        <div class="quick-link" onclick="showPage('directory')">
+                            <h3>💼 מדריך עסקים</h3>
+                            <p>עסקים ושירותים של בוגרי המחזור</p>
+                        </div>
+                        <div class="quick-link" onclick="showPage('messages')">
+                            <h3>💬 הודעות</h3>
+                            <p>תקשורת עם חברי המחזור</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Events Page -->
+                <div id="page-events" class="page">
+                    <div class="page-header">
+                        <h1 class="page-title">אירועים</h1>
+                        <button class="btn btn-primary">אירוע חדש</button>
+                    </div>
+
+                    <div class="card">
+                        <div class="event-card">
+                            <div class="event-info">
+                                <h3 class="event-title">מפגש מחזור - 20 שנה!</h3>
+                                <p class="event-creator">נוצר על ידי רונית לוי</p>
+                            </div>
+                            <div class="event-datetime">
+                                <div class="event-date">יום שישי, 15 בדצמבר</div>
+                                <div class="event-time">20:00</div>
+                            </div>
+                        </div>
+                        <p class="event-description">חוגגים 20 שנה לסיום התיכון! בואו לערב נוסטלגיה עם אוכל, שתייה והרבה זיכרונות.</p>
+                        <p class="event-location">📍 מסעדת "הגינה", תל אביב</p>
+                        <div class="event-footer">
+                            <span class="event-attendees">32 מאשרים הגעה</span>
+                            <div class="rsvp-buttons">
+                                <button class="rsvp-btn going">מגיע</button>
+                                <button class="rsvp-btn">אולי</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="event-card">
+                            <div class="event-info">
+                                <h3 class="event-title">נטוורקינג בוקר</h3>
+                                <p class="event-creator">נוצר על ידי יוסי כהן</p>
+                            </div>
+                            <div class="event-datetime">
+                                <div class="event-date">יום רביעי, 20 בדצמבר</div>
+                                <div class="event-time">08:00</div>
+                            </div>
+                        </div>
+                        <p class="event-description">מפגש נטוורקינג לבוגרי המחזור - הזדמנות להכיר שיתופי פעולה עסקיים.</p>
+                        <p class="event-location">📍 WeWork, הרצליה פיתוח</p>
+                        <div class="event-footer">
+                            <span class="event-attendees">15 מאשרים הגעה / 25 מקומות</span>
+                            <div class="rsvp-buttons">
+                                <button class="rsvp-btn">מגיע</button>
+                                <button class="rsvp-btn maybe">אולי</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Directory Page -->
+                <div id="page-directory" class="page">
+                    <div class="page-header">
+                        <h1 class="page-title">מדריך עסקים</h1>
+                        <button class="btn btn-primary">הוספת עסק</button>
+                    </div>
+
+                    <div class="filter-bar">
+                        <select class="form-input form-select">
+                            <option>כל הקטגוריות</option>
+                            <option>עורכי דין</option>
+                            <option>רואי חשבון</option>
+                            <option>שיווק</option>
+                            <option>טכנולוגיה</option>
+                            <option>נדל"ן</option>
+                        </select>
+                    </div>
+
+                    <div class="grid-2">
+                        <div class="card">
+                            <div class="business-card-header">
+                                <div>
+                                    <h3 class="business-name">שמעון ושות' - רואי חשבון</h3>
+                                    <p class="business-owner">שלומי שמעון</p>
+                                </div>
+                                <span class="badge business-category">רואי חשבון</span>
+                            </div>
+                            <p class="business-description">משרד רואי חשבון המתמחה בליווי סטארטאפים ועסקים קטנים. ניסיון של 15 שנה.</p>
+                            <div class="business-details">
+                                <span>📍 תל אביב</span>
+                                <span>📞 050-1234567</span>
+                                <a href="#">🌐 אתר</a>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="business-card-header">
+                                <div>
+                                    <h3 class="business-name">דיגיטל פלוס</h3>
+                                    <p class="business-owner">רונית לוי</p>
+                                </div>
+                                <span class="badge business-category">שיווק</span>
+                            </div>
+                            <p class="business-description">סוכנות שיווק דיגיטלי - קמפיינים, SEO, רשתות חברתיות ואסטרטגיה שיווקית.</p>
+                            <div class="business-details">
+                                <span>📍 הרצליה</span>
+                                <span>📞 052-7654321</span>
+                                <a href="#">🌐 אתר</a>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="business-card-header">
+                                <div>
+                                    <h3 class="business-name">כהן - משרד עורכי דין</h3>
+                                    <p class="business-owner">מיכל שמעון</p>
+                                </div>
+                                <span class="badge business-category">עורכי דין</span>
+                            </div>
+                            <p class="business-description">התמחות בדיני עבודה, חוזים מסחריים וליטיגציה אזרחית.</p>
+                            <div class="business-details">
+                                <span>📍 רמת גן</span>
+                                <span>📞 03-1234567</span>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="business-card-header">
+                                <div>
+                                    <h3 class="business-name">TechSolutions</h3>
+                                    <p class="business-owner">אורי בן-דוד</p>
+                                </div>
+                                <span class="badge business-category">טכנולוגיה</span>
+                            </div>
+                            <p class="business-description">פיתוח תוכנה מותאם אישית, אפליקציות ומערכות ניהול.</p>
+                            <div class="business-details">
+                                <span>📍 חיפה</span>
+                                <a href="#">🌐 אתר</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Messages Page -->
+                <div id="page-messages" class="page">
+                    <div class="page-header">
+                        <h1 class="page-title">הודעות</h1>
+                        <button class="btn btn-primary">שיחה חדשה</button>
+                    </div>
+
+                    <div class="messages-container">
+                        <div class="threads-list">
+                            <div class="thread-item active">
+                                <div class="thread-name">רונית לוי</div>
+                                <div class="thread-preview">מעולה, נדבר מחר!</div>
+                            </div>
+                            <div class="thread-item">
+                                <div class="thread-name">יוסי כהן</div>
+                                <div class="thread-preview">תודה על ההמלצה</div>
+                            </div>
+                            <div class="thread-item">
+                                <div class="thread-name">מיכל שמעון</div>
+                                <div class="thread-preview">בטח, שלח לי את הפרטים</div>
+                            </div>
+                        </div>
+
+                        <div class="chat-container">
+                            <div class="chat-messages">
+                                <div class="message received">
+                                    <div class="message-bubble">היי דוד! ראיתי שאתה מחפש מפתחים</div>
+                                    <div class="message-time">10:30</div>
+                                </div>
+                                <div class="message sent">
+                                    <div class="message-bubble">היי רונית! כן, אנחנו מגייסים. יש לך מישהו להמליץ?</div>
+                                    <div class="message-time">10:32</div>
+                                </div>
+                                <div class="message received">
+                                    <div class="message-bubble">בהחלט, יש לי חבר מעולה. אשלח לך את הקו"ח שלו</div>
+                                    <div class="message-time">10:35</div>
+                                </div>
+                                <div class="message sent">
+                                    <div class="message-bubble">מעולה, נדבר מחר!</div>
+                                    <div class="message-time">10:36</div>
+                                </div>
+                            </div>
+                            <div class="chat-input">
+                                <input type="text" class="form-input" placeholder="הקלד הודעה...">
+                                <button class="btn btn-primary">שלח</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Profile Page -->
+                <div id="page-profile" class="page">
+                    <h1 class="page-title" style="margin-bottom: 24px;">הפרופיל שלי</h1>
+
+                    <div class="card profile-section">
+                        <h2>פרטים אישיים</h2>
+                        <div class="profile-grid">
+                            <div class="form-group">
+                                <label class="form-label">שם פרטי</label>
+                                <input type="text" class="form-input" value="דוד">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">שם משפחה</label>
+                                <input type="text" class="form-input" value="כהן">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">עיר</label>
+                                <input type="text" class="form-input" value="תל אביב">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">מדינה</label>
+                                <input type="text" class="form-input" value="ישראל">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card profile-section">
+                        <h2>מידע מקצועי</h2>
+                        <div class="form-group">
+                            <label class="form-label">תפקיד נוכחי</label>
+                            <input type="text" class="form-input" value="מנהל פיתוח" placeholder="לדוגמה: מנהל שיווק, מפתח Full-Stack">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">קצת עליי</label>
+                            <textarea class="form-input form-textarea">מנהל פיתוח עם 10 שנות ניסיון. מתמחה בבניית צוותים ופיתוח מוצרים.</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">LinkedIn</label>
+                            <input type="url" class="form-input" placeholder="https://linkedin.com/in/...">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">אתר אישי</label>
+                            <input type="url" class="form-input" placeholder="https://...">
+                        </div>
+                    </div>
+
+                    <div class="card profile-section">
+                        <h2>נטוורקינג</h2>
+                        <div class="form-group">
+                            <label class="form-label">במה אני יכול לעזור</label>
+                            <textarea class="form-input form-textarea" placeholder="תחומי מומחיות, ייעוץ, קשרים...">ייעוץ טכנולוגי, גיוס מפתחים, אסטרטגיית מוצר</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">מה אני מחפש</label>
+                            <textarea class="form-input form-textarea" placeholder="הזדמנויות, שיתופי פעולה, ייעוץ...">שיתופי פעולה עם סטארטאפים, הזדמנויות השקעה</textarea>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary">שמירת שינויים</button>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>
+            AlumniHub אינה קשורה רשמית לבית הספר. הפלטפורמה מופעלת באופן עצמאי על ידי בוגרי המחזור.
+            <br>
+            השימוש באתר כפוף ל<a href="#">תנאי השימוש</a> ו<a href="#">מדיניות הפרטיות</a>.
+        </p>
+    </footer>
+
+    <script>
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+
+            // Show selected page
+            document.getElementById('page-' + pageId).classList.add('active');
+
+            // Update nav
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            event.target.closest('.nav-link').classList.add('active');
+
+            // Close mobile sidebar
+            document.querySelector('.sidebar').classList.remove('open');
+            document.querySelector('.overlay').classList.remove('open');
+        }
+
+        function toggleSidebar() {
+            document.querySelector('.sidebar').classList.toggle('open');
+            document.querySelector('.overlay').classList.toggle('open');
+        }
+
+        function togglePostForm() {
+            const form = document.getElementById('new-post-form');
+            form.style.display = form.style.display === 'none' ? 'block' : 'none';
+        }
+    </script>
+</body>
+</html>
