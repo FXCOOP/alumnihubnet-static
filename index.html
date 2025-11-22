@@ -3,32 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AlumniHub - קהילת בוגרי תיכון חדרה 2003</title>
+    <title>מחזור 2003 - הבית שלנו 🎓</title>
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #0a66c2;
-            --primary-dark: #004182;
-            --primary-light: #e8f4fd;
-            --secondary: #057642;
-            --accent: #915907;
-            --text-primary: #191919;
-            --text-secondary: #666666;
-            --text-muted: #00000099;
-            --bg-primary: #f3f2ef;
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --primary-light: #eef2ff;
+            --secondary: #f59e0b;
+            --secondary-light: #fef3c7;
+            --accent: #ec4899;
+            --accent-light: #fce7f3;
+            --success: #10b981;
+            --success-light: #d1fae5;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --text-muted: #94a3b8;
+            --bg-primary: #f8fafc;
             --bg-card: #ffffff;
-            --border: #e0dfdc;
-            --border-light: #f0eeeb;
-            --success: #057642;
-            --warning: #915907;
-            --danger: #cc1016;
-            --shadow-sm: 0 0 0 1px rgba(0,0,0,0.08);
-            --shadow-md: 0 4px 12px rgba(0,0,0,0.15);
-            --shadow-lg: 0 8px 24px rgba(0,0,0,0.2);
-            --radius-sm: 8px;
-            --radius-md: 12px;
-            --radius-lg: 16px;
+            --border: #e2e8f0;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 30px rgba(0,0,0,0.15);
+            --radius-sm: 12px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
         }
 
         * {
@@ -38,32 +38,48 @@
         }
 
         body {
-            font-family: 'Heebo', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Heebo', sans-serif;
             background: var(--bg-primary);
             color: var(--text-primary);
-            line-height: 1.5;
+            line-height: 1.6;
             min-height: 100vh;
         }
 
-        /* Top Navigation Bar */
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        /* Top Navigation */
         .top-nav {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            height: 52px;
-            background: var(--bg-card);
-            border-bottom: 1px solid var(--border);
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             z-index: 1000;
             display: flex;
             align-items: center;
             justify-content: center;
+            box-shadow: var(--shadow-md);
         }
 
         .top-nav-content {
             width: 100%;
-            max-width: 1128px;
-            padding: 0 16px;
+            max-width: 1200px;
+            padding: 0 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -72,148 +88,98 @@
         .logo-section {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 12px;
         }
 
         .logo {
-            width: 34px;
-            height: 34px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            font-size: 24px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .logo-text {
             color: white;
-            font-weight: 800;
+            font-weight: 700;
             font-size: 18px;
         }
 
-        .search-box {
-            position: relative;
-            flex: 1;
-            max-width: 280px;
-            margin: 0 16px;
-        }
-
-        .search-box input {
-            width: 100%;
-            height: 34px;
-            padding: 0 16px 0 36px;
-            background: var(--primary-light);
-            border: none;
-            border-radius: 4px;
-            font-size: 14px;
-            font-family: inherit;
-        }
-
-        .search-box input:focus {
-            outline: none;
-            background: white;
-            box-shadow: 0 0 0 2px var(--primary);
-        }
-
-        .search-box i {
-            position: absolute;
-            right: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-secondary);
+        .logo-text span {
+            opacity: 0.8;
+            font-weight: 400;
             font-size: 14px;
         }
 
         .nav-items {
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 8px;
         }
 
         .nav-item {
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 4px 12px;
-            border-radius: 4px;
+            padding: 8px 16px;
+            border-radius: var(--radius-sm);
             cursor: pointer;
-            color: var(--text-secondary);
+            color: rgba(255,255,255,0.7);
             text-decoration: none;
-            min-width: 60px;
-            transition: all 0.15s;
+            transition: all 0.2s;
             border: none;
             background: none;
             font-family: inherit;
         }
 
-        .nav-item:hover {
-            color: var(--text-primary);
-        }
-
-        .nav-item.active {
-            color: var(--text-primary);
-        }
-
-        .nav-item.active::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100%;
-            height: 2px;
-            background: var(--text-primary);
+        .nav-item:hover, .nav-item.active {
+            color: white;
+            background: rgba(255,255,255,0.15);
         }
 
         .nav-item i {
             font-size: 20px;
-            margin-bottom: 2px;
+            margin-bottom: 4px;
         }
 
         .nav-item span {
             font-size: 11px;
-            white-space: nowrap;
-        }
-
-        .nav-user {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            padding: 4px 8px;
+            font-weight: 500;
         }
 
         .nav-user-avatar {
-            width: 24px;
-            height: 24px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: white;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 10px;
+            font-size: 12px;
             font-weight: 600;
+            color: var(--primary);
         }
 
         /* Main Layout */
         .app-container {
-            padding-top: 52px;
+            padding-top: 60px;
             min-height: 100vh;
         }
 
         .main-layout {
-            max-width: 1128px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 24px 16px;
+            padding: 24px 20px;
             display: grid;
-            grid-template-columns: 225px 1fr 300px;
+            grid-template-columns: 280px 1fr 320px;
             gap: 24px;
         }
 
-        /* Left Sidebar - Profile Card */
-        .profile-sidebar {
+        /* Left Sidebar */
+        .left-sidebar {
             position: sticky;
-            top: 76px;
+            top: 84px;
             height: fit-content;
         }
 
+        /* Profile Card */
         .profile-card {
             background: var(--bg-card);
             border-radius: var(--radius-md);
@@ -222,25 +188,30 @@
         }
 
         .profile-cover {
-            height: 56px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            position: relative;
         }
 
-        .profile-card-content {
+        .profile-cover::after {
+            content: '🎓';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 24px;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .profile-content {
             padding: 0 16px 16px;
             text-align: center;
         }
 
-        .profile-avatar-wrapper {
-            margin-top: -40px;
-            margin-bottom: 12px;
-        }
-
         .profile-avatar {
-            width: 72px;
-            height: 72px;
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
-            border: 2px solid var(--bg-card);
+            border: 4px solid var(--bg-card);
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             display: flex;
             align-items: center;
@@ -248,144 +219,178 @@
             color: white;
             font-size: 24px;
             font-weight: 700;
-            margin: 0 auto;
+            margin: -40px auto 12px;
+            box-shadow: var(--shadow-md);
         }
 
         .profile-name {
-            font-size: 16px;
-            font-weight: 600;
+            font-size: 18px;
+            font-weight: 700;
             color: var(--text-primary);
-            cursor: pointer;
-        }
-
-        .profile-name:hover {
-            color: var(--primary);
-            text-decoration: underline;
         }
 
         .profile-headline {
-            font-size: 12px;
+            font-size: 13px;
             color: var(--text-secondary);
             margin-top: 4px;
         }
 
-        .profile-stats {
-            border-top: 1px solid var(--border);
-            padding: 12px 16px;
+        .profile-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--secondary-light);
+            color: var(--secondary);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
             margin-top: 12px;
         }
 
-        .profile-stat {
-            display: flex;
-            justify-content: space-between;
-            font-size: 12px;
-            padding: 4px 0;
+        /* Quick Stats */
+        .quick-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            padding: 16px;
+            border-top: 1px solid var(--border);
+        }
+
+        .quick-stat {
+            text-align: center;
+            padding: 8px;
+            border-radius: var(--radius-sm);
             cursor: pointer;
+            transition: background 0.2s;
         }
 
-        .profile-stat:hover span:first-child {
+        .quick-stat:hover {
+            background: var(--bg-primary);
+        }
+
+        .quick-stat-value {
+            font-size: 20px;
+            font-weight: 700;
             color: var(--primary);
-            text-decoration: underline;
         }
 
-        .profile-stat span:first-child {
+        .quick-stat-label {
+            font-size: 11px;
             color: var(--text-secondary);
         }
 
-        .profile-stat span:last-child {
-            color: var(--primary);
-            font-weight: 600;
-        }
-
-        /* Sidebar Navigation */
-        .sidebar-nav {
+        /* Navigation Menu */
+        .nav-menu {
             background: var(--bg-card);
             border-radius: var(--radius-md);
-            margin-top: 8px;
+            margin-top: 12px;
             box-shadow: var(--shadow-sm);
             overflow: hidden;
         }
 
-        .sidebar-nav-item {
+        .nav-menu-item {
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 12px 16px;
+            padding: 14px 16px;
             color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
             cursor: pointer;
-            transition: background 0.15s;
+            transition: all 0.2s;
             border: none;
             background: none;
             width: 100%;
             text-align: right;
             font-family: inherit;
+            font-size: 14px;
+            font-weight: 500;
         }
 
-        .sidebar-nav-item:hover {
+        .nav-menu-item:hover {
             background: var(--bg-primary);
+            color: var(--text-primary);
         }
 
-        .sidebar-nav-item.active {
-            color: var(--primary);
+        .nav-menu-item.active {
             background: var(--primary-light);
+            color: var(--primary);
         }
 
-        .sidebar-nav-item i {
+        .nav-menu-item i {
             width: 20px;
             text-align: center;
+            font-size: 16px;
         }
 
-        /* Batch Members Section */
+        .nav-menu-item .badge {
+            margin-right: auto;
+            background: var(--accent);
+            color: white;
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        /* Batch Members */
         .batch-members {
             background: var(--bg-card);
             border-radius: var(--radius-md);
-            margin-top: 8px;
+            margin-top: 12px;
             box-shadow: var(--shadow-sm);
             overflow: hidden;
         }
 
         .batch-members-header {
-            padding: 12px 16px;
+            padding: 14px 16px;
             font-size: 14px;
             font-weight: 600;
-            color: var(--text-primary);
             border-bottom: 1px solid var(--border);
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .batch-members-count {
+        .online-count {
+            display: flex;
+            align-items: center;
+            gap: 6px;
             font-size: 12px;
-            color: var(--text-secondary);
-            font-weight: 400;
+            color: var(--success);
+            font-weight: 500;
+        }
+
+        .online-count::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--success);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
         }
 
         .batch-members-list {
-            max-height: 280px;
+            max-height: 250px;
             overflow-y: auto;
         }
 
-        .batch-member-item {
+        .member-item {
             display: flex;
             align-items: center;
             gap: 10px;
             padding: 10px 16px;
             cursor: pointer;
-            transition: background 0.15s;
+            transition: background 0.2s;
         }
 
-        .batch-member-item:hover {
+        .member-item:hover {
             background: var(--bg-primary);
         }
 
-        .batch-member-avatar {
+        .member-avatar {
             position: relative;
-            width: 32px;
-            height: 32px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             display: flex;
@@ -394,10 +399,9 @@
             color: white;
             font-size: 11px;
             font-weight: 600;
-            flex-shrink: 0;
         }
 
-        .online-indicator {
+        .online-dot {
             position: absolute;
             bottom: 0;
             right: 0;
@@ -405,37 +409,25 @@
             height: 10px;
             border-radius: 50%;
             border: 2px solid var(--bg-card);
-        }
-
-        .online-indicator.online {
-            background: #22c55e;
-        }
-
-        .online-indicator.offline {
             background: var(--border);
         }
 
-        .batch-member-info {
-            flex: 1;
-            min-width: 0;
+        .online-dot.online {
+            background: var(--success);
         }
 
-        .batch-member-name {
+        .member-info {
+            flex: 1;
+        }
+
+        .member-name {
             font-size: 13px;
             font-weight: 500;
-            color: var(--text-primary);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
         }
 
-        .batch-member-status {
+        .member-status {
             font-size: 11px;
-            color: var(--text-secondary);
-        }
-
-        .batch-member-status.online {
-            color: #22c55e;
+            color: var(--text-muted);
         }
 
         /* Main Content */
@@ -443,17 +435,87 @@
             min-width: 0;
         }
 
+        /* Page Container */
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
         /* Card Base */
         .card {
             background: var(--bg-card);
             border-radius: var(--radius-md);
             box-shadow: var(--shadow-sm);
+            margin-bottom: 16px;
+            overflow: hidden;
+        }
+
+        /* Welcome Banner */
+        .welcome-banner {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            padding: 24px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-banner::before {
+            content: '✨';
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 24px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .welcome-banner::after {
+            content: '🎉';
+            position: absolute;
+            bottom: 10px;
+            left: 20px;
+            font-size: 24px;
+            animation: float 3s ease-in-out infinite 0.5s;
+        }
+
+        .welcome-title {
+            font-size: 24px;
+            font-weight: 700;
             margin-bottom: 8px;
         }
 
-        /* Create Post Box */
-        .create-post-box {
-            padding: 16px;
+        .welcome-subtitle {
+            opacity: 0.9;
+            font-size: 14px;
+        }
+
+        .welcome-stats {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-top: 16px;
+        }
+
+        .welcome-stat {
+            text-align: center;
+        }
+
+        .welcome-stat-value {
+            font-size: 28px;
+            font-weight: 800;
+        }
+
+        .welcome-stat-label {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+
+        /* Create Post */
+        .create-post {
+            padding: 20px;
         }
 
         .create-post-header {
@@ -472,62 +534,60 @@
             justify-content: center;
             color: white;
             font-weight: 600;
-            flex-shrink: 0;
         }
 
         .create-post-input {
             flex: 1;
             height: 48px;
-            padding: 0 16px;
-            border: 1px solid var(--border);
+            padding: 0 20px;
+            border: 2px solid var(--border);
             border-radius: 24px;
             font-size: 14px;
             font-family: inherit;
             cursor: pointer;
-            transition: all 0.15s;
-            background: transparent;
-            color: var(--text-secondary);
+            transition: all 0.2s;
+            background: var(--bg-primary);
         }
 
         .create-post-input:hover {
-            background: var(--bg-primary);
+            border-color: var(--primary);
         }
 
         .create-post-actions {
             display: flex;
             justify-content: space-around;
-            padding-top: 12px;
-            margin-top: 12px;
+            padding-top: 16px;
+            margin-top: 16px;
             border-top: 1px solid var(--border);
         }
 
-        .create-post-action {
+        .create-action {
             display: flex;
             align-items: center;
             gap: 8px;
-            padding: 12px 16px;
+            padding: 10px 16px;
             border-radius: var(--radius-sm);
             cursor: pointer;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 500;
             color: var(--text-secondary);
-            transition: background 0.15s;
+            transition: all 0.2s;
             border: none;
             background: none;
-            font-family: inherit;
         }
 
-        .create-post-action:hover {
+        .create-action:hover {
             background: var(--bg-primary);
+            transform: translateY(-2px);
         }
 
-        .create-post-action i {
+        .create-action i {
             font-size: 18px;
         }
 
-        .create-post-action.photo i { color: #378fe9; }
-        .create-post-action.event i { color: #c37d16; }
-        .create-post-action.article i { color: #e16745; }
+        .create-action.memory i { color: #f59e0b; }
+        .create-action.help i { color: #ec4899; }
+        .create-action.event i { color: #6366f1; }
 
         /* Post Card */
         .post-card {
@@ -535,7 +595,7 @@
         }
 
         .post-header {
-            padding: 16px 16px 0;
+            padding: 16px 20px;
             display: flex;
             gap: 12px;
         }
@@ -544,123 +604,90 @@
             width: 48px;
             height: 48px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             font-weight: 600;
             font-size: 14px;
-            flex-shrink: 0;
         }
 
         .post-meta {
             flex: 1;
-            min-width: 0;
         }
 
         .post-author {
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 600;
-            color: var(--text-primary);
             display: flex;
             align-items: center;
             gap: 8px;
         }
 
-        .post-author:hover {
-            color: var(--primary);
-            text-decoration: underline;
-            cursor: pointer;
-        }
-
-        .post-badge {
+        .post-type {
             font-size: 10px;
             font-weight: 600;
-            padding: 2px 8px;
-            border-radius: 4px;
+            padding: 3px 10px;
+            border-radius: 12px;
         }
 
-        .post-badge.opportunity {
-            background: #e8f5e9;
+        .post-type.memory {
+            background: var(--secondary-light);
             color: var(--secondary);
         }
 
-        .post-badge.question {
-            background: #f3e8ff;
-            color: #7c3aed;
+        .post-type.help {
+            background: var(--accent-light);
+            color: var(--accent);
         }
 
-        .post-badge.general {
-            background: var(--bg-primary);
-            color: var(--text-secondary);
+        .post-type.celebration {
+            background: var(--success-light);
+            color: var(--success);
+        }
+
+        .post-type.general {
+            background: var(--primary-light);
+            color: var(--primary);
         }
 
         .post-headline {
             font-size: 12px;
             color: var(--text-secondary);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
         }
 
         .post-time {
-            font-size: 12px;
+            font-size: 11px;
             color: var(--text-muted);
             display: flex;
             align-items: center;
             gap: 4px;
-        }
-
-        .post-time i {
-            font-size: 10px;
-        }
-
-        .post-menu {
-            padding: 8px;
-            border-radius: 50%;
-            cursor: pointer;
-            color: var(--text-secondary);
-        }
-
-        .post-menu:hover {
-            background: var(--bg-primary);
+            margin-top: 2px;
         }
 
         .post-content {
-            padding: 12px 16px;
-        }
-
-        .post-title {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: var(--text-primary);
+            padding: 0 20px 16px;
         }
 
         .post-text {
-            font-size: 14px;
-            color: var(--text-primary);
+            font-size: 15px;
             line-height: 1.6;
-            white-space: pre-wrap;
+            color: var(--text-primary);
         }
 
-        .post-text .hashtag {
-            color: var(--primary);
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        .post-text .hashtag:hover {
-            text-decoration: underline;
+        .post-image {
+            width: 100%;
+            margin-top: 12px;
+            border-radius: var(--radius-sm);
         }
 
         .post-stats {
-            padding: 8px 16px;
+            padding: 12px 20px;
             display: flex;
             justify-content: space-between;
             font-size: 12px;
             color: var(--text-muted);
+            border-top: 1px solid var(--border);
         }
 
         .post-reactions {
@@ -673,427 +700,435 @@
             display: flex;
         }
 
-        .reaction-icon {
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 10px;
-            margin-right: -4px;
-        }
-
-        .reaction-icon.like { background: var(--primary); color: white; }
-        .reaction-icon.celebrate { background: var(--secondary); color: white; }
-        .reaction-icon.love { background: #df704d; color: white; }
-
-        .post-comments-count:hover {
-            color: var(--primary);
-            text-decoration: underline;
-            cursor: pointer;
+        .reaction-icons span {
+            margin-left: -4px;
         }
 
         .post-actions {
-            padding: 4px 8px;
-            border-top: 1px solid var(--border);
             display: flex;
-            justify-content: space-around;
+            padding: 8px 20px 16px;
+            gap: 8px;
         }
 
         .post-action {
+            flex: 1;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 8px;
-            padding: 12px 16px;
+            padding: 10px;
             border-radius: var(--radius-sm);
             cursor: pointer;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 500;
             color: var(--text-secondary);
-            transition: all 0.15s;
+            transition: all 0.2s;
             border: none;
             background: none;
-            font-family: inherit;
         }
 
         .post-action:hover {
             background: var(--bg-primary);
-            color: var(--text-primary);
-        }
-
-        .post-action.active {
             color: var(--primary);
         }
 
-        .post-action i {
-            font-size: 18px;
-        }
-
         /* Comments Section */
-        .comments-section {
-            padding: 0 16px 16px;
+        .post-comments {
+            padding: 0 20px 16px;
+            border-top: 1px solid var(--border);
         }
 
-        .comment-input-wrapper {
+        .comment {
             display: flex;
-            gap: 8px;
-            margin-bottom: 12px;
+            gap: 10px;
+            padding: 12px 0;
         }
 
         .comment-avatar {
             width: 32px;
             height: 32px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             font-size: 10px;
             font-weight: 600;
-            flex-shrink: 0;
         }
 
-        .comment-input {
-            flex: 1;
-            padding: 8px 12px;
-            border: 1px solid var(--border);
-            border-radius: 24px;
-            font-size: 14px;
-            font-family: inherit;
-            background: var(--bg-primary);
-        }
-
-        .comment-input:focus {
-            outline: none;
-            border-color: var(--primary);
-            background: white;
-        }
-
-        .comment {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 12px;
-        }
-
-        .comment-body {
+        .comment-content {
             flex: 1;
             background: var(--bg-primary);
-            padding: 8px 12px;
-            border-radius: 0 var(--radius-sm) var(--radius-sm) var(--radius-sm);
+            padding: 10px 14px;
+            border-radius: var(--radius-sm);
         }
 
         .comment-author {
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 600;
         }
 
-        .comment-author-headline {
-            font-size: 11px;
-            color: var(--text-muted);
-        }
-
         .comment-text {
-            font-size: 14px;
-            margin-top: 4px;
-        }
-
-        .comment-actions {
-            display: flex;
-            gap: 12px;
-            margin-top: 4px;
-            font-size: 12px;
-        }
-
-        .comment-action {
-            color: var(--text-muted);
-            font-weight: 500;
-            cursor: pointer;
-        }
-
-        .comment-action:hover {
-            color: var(--primary);
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-top: 2px;
         }
 
         /* Right Sidebar */
         .right-sidebar {
             position: sticky;
-            top: 76px;
+            top: 84px;
             height: fit-content;
         }
 
-        .sidebar-card {
+        /* Birthdays Card */
+        .birthdays-card {
             background: var(--bg-card);
             border-radius: var(--radius-md);
+            padding: 20px;
             box-shadow: var(--shadow-sm);
-            margin-bottom: 8px;
-            overflow: hidden;
         }
 
-        .sidebar-card-header {
-            padding: 12px 16px;
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
             font-size: 16px;
             font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .card-header i {
+            font-size: 20px;
+        }
+
+        .birthday-item {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-        }
-
-        .sidebar-card-header i {
-            color: var(--text-muted);
-            cursor: pointer;
-        }
-
-        .event-item {
-            padding: 12px 16px;
-            border-top: 1px solid var(--border);
-            cursor: pointer;
-            transition: background 0.15s;
-        }
-
-        .event-item:hover {
-            background: var(--bg-primary);
-        }
-
-        .event-item-date {
-            font-size: 12px;
-            color: var(--primary);
-            font-weight: 600;
-        }
-
-        .event-item-title {
-            font-size: 14px;
-            font-weight: 600;
-            margin: 4px 0;
-        }
-
-        .event-item-attendees {
-            font-size: 12px;
-            color: var(--text-muted);
-        }
-
-        .member-item {
-            padding: 12px 16px;
-            display: flex;
             gap: 12px;
-            align-items: center;
-            cursor: pointer;
-            transition: background 0.15s;
+            padding: 12px;
+            background: var(--secondary-light);
+            border-radius: var(--radius-sm);
+            margin-bottom: 8px;
         }
 
-        .member-item:hover {
-            background: var(--bg-primary);
-        }
-
-        .member-avatar {
-            width: 48px;
-            height: 48px;
+        .birthday-avatar {
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             font-weight: 600;
+            font-size: 12px;
         }
 
-        .member-info {
+        .birthday-info {
             flex: 1;
         }
 
-        .member-name {
+        .birthday-name {
             font-size: 14px;
             font-weight: 600;
         }
 
-        .member-headline {
+        .birthday-date {
             font-size: 12px;
-            color: var(--text-muted);
+            color: var(--text-secondary);
         }
 
-        .connect-btn {
-            padding: 6px 16px;
-            border: 1px solid var(--primary);
+        .birthday-btn {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 6px 12px;
             border-radius: 16px;
-            background: transparent;
-            color: var(--primary);
-            font-size: 14px;
+            font-size: 12px;
             font-weight: 600;
             cursor: pointer;
-            font-family: inherit;
-            transition: all 0.15s;
+            transition: transform 0.2s;
         }
 
-        .connect-btn:hover {
-            background: var(--primary-light);
+        .birthday-btn:hover {
+            transform: scale(1.05);
         }
 
-        .see-all-link {
-            display: block;
-            text-align: center;
-            padding: 12px;
-            color: var(--text-secondary);
-            font-size: 14px;
-            font-weight: 500;
+        /* Map Preview */
+        .map-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            box-shadow: var(--shadow-sm);
+            margin-top: 16px;
+        }
+
+        .map-preview {
+            height: 150px;
+            background: linear-gradient(135deg, #e0e7ff 0%, #f0e6ff 100%);
+            border-radius: var(--radius-sm);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .map-preview:hover {
+            transform: scale(1.02);
+        }
+
+        .map-preview i {
+            font-size: 32px;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .map-preview span {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .map-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 12px;
+            padding-top: 12px;
             border-top: 1px solid var(--border);
         }
 
-        .see-all-link:hover {
-            background: var(--bg-primary);
+        .map-stat {
+            text-align: center;
         }
 
-        /* Footer */
-        .footer-links {
-            padding: 16px;
+        .map-stat-value {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .map-stat-label {
             font-size: 11px;
             color: var(--text-muted);
-            text-align: center;
         }
 
-        .footer-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            margin: 0 4px;
-        }
-
-        .footer-links a:hover {
-            color: var(--primary);
-            text-decoration: underline;
-        }
-
-        .footer-disclaimer {
-            margin-top: 8px;
-            padding-top: 8px;
-            border-top: 1px solid var(--border);
-        }
-
-        /* Pages */
-        .page {
-            display: none;
-        }
-
-        .page.active {
-            display: block;
-        }
-
-        /* Events Page */
-        .event-card {
+        /* Events Preview */
+        .events-preview {
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
             padding: 20px;
+            box-shadow: var(--shadow-sm);
+            margin-top: 16px;
         }
 
-        .event-card-header {
+        .event-item {
             display: flex;
-            justify-content: space-between;
-            gap: 16px;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
         }
 
-        .event-card-title {
-            font-size: 18px;
+        .event-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .event-date {
+            width: 50px;
+            text-align: center;
+            background: var(--primary-light);
+            border-radius: var(--radius-sm);
+            padding: 8px;
+        }
+
+        .event-day {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .event-month {
+            font-size: 10px;
+            color: var(--primary);
+            text-transform: uppercase;
+        }
+
+        .event-details {
+            flex: 1;
+        }
+
+        .event-title {
+            font-size: 14px;
             font-weight: 600;
         }
 
-        .event-card-creator {
+        .event-meta {
             font-size: 12px;
             color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 4px;
             margin-top: 4px;
         }
 
-        .event-card-datetime {
-            text-align: left;
+        /* Events Page */
+        .events-grid {
+            display: grid;
+            gap: 16px;
+        }
+
+        .event-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .event-card-header {
+            padding: 20px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
         }
 
         .event-card-date {
             font-size: 14px;
-            font-weight: 600;
-            color: var(--primary);
+            opacity: 0.9;
         }
 
-        .event-card-time {
-            font-size: 12px;
-            color: var(--text-muted);
+        .event-card-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-top: 8px;
         }
 
-        .event-card-description {
-            margin: 16px 0;
-            font-size: 14px;
-            color: var(--text-primary);
-        }
-
-        .event-card-location {
-            font-size: 14px;
-            color: var(--text-secondary);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .event-card-footer {
-            margin-top: 16px;
-            padding-top: 16px;
-            border-top: 1px solid var(--border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .event-card-attendees {
-            font-size: 14px;
-            color: var(--text-muted);
-        }
-
-        .rsvp-buttons {
-            display: flex;
-            gap: 8px;
-        }
-
-        .rsvp-btn {
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            border: none;
-            font-family: inherit;
-            transition: all 0.15s;
-        }
-
-        .rsvp-btn.going {
-            background: var(--secondary);
-            color: white;
-        }
-
-        .rsvp-btn.maybe {
-            background: var(--warning);
-            color: white;
-        }
-
-        .rsvp-btn.default {
-            background: var(--bg-primary);
-            color: var(--text-secondary);
-        }
-
-        .rsvp-btn.default:hover {
-            background: var(--border);
-        }
-
-        /* Directory Page */
-        .directory-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 8px;
-        }
-
-        .business-card {
+        .event-card-body {
             padding: 20px;
         }
 
-        .business-card-header {
+        .event-card-info {
             display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .event-card-info i {
+            width: 20px;
+            color: var(--primary);
+        }
+
+        .event-attendees {
+            display: flex;
+            align-items: center;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+        }
+
+        .attendee-avatars {
+            display: flex;
+        }
+
+        .attendee-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 2px solid var(--bg-card);
+            margin-left: -8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        .attendee-count {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-right: 12px;
+        }
+
+        .event-rsvp-btn {
+            margin-right: auto;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .event-rsvp-btn:hover {
+            background: var(--primary-dark);
+            transform: scale(1.05);
+        }
+
+        /* Directory Page */
+        .directory-filters {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            border: 2px solid var(--border);
+            border-radius: 20px;
+            background: var(--bg-card);
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            border-color: var(--primary);
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+
+        .business-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .business-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.2s;
+        }
+
+        .business-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .business-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
             margin-bottom: 12px;
+        }
+
+        .business-logo {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
         }
 
         .business-name {
@@ -1101,114 +1136,106 @@
             font-weight: 600;
         }
 
-        .business-owner {
+        .business-category {
             font-size: 12px;
             color: var(--text-muted);
-            margin-top: 2px;
         }
 
-        .business-category {
-            font-size: 11px;
-            font-weight: 600;
-            padding: 4px 8px;
-            border-radius: 4px;
-            background: var(--primary-light);
-            color: var(--primary);
-        }
-
-        .business-description {
-            font-size: 14px;
+        .business-owner {
+            font-size: 13px;
             color: var(--text-secondary);
             margin-bottom: 12px;
         }
 
-        .business-details {
+        .business-contact {
             display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
+            gap: 8px;
+        }
+
+        .contact-btn {
+            flex: 1;
+            padding: 8px;
+            border: none;
+            border-radius: var(--radius-sm);
             font-size: 12px;
-            color: var(--text-muted);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
         }
 
-        .business-details a {
-            color: var(--primary);
-            text-decoration: none;
+        .contact-btn.primary {
+            background: var(--primary);
+            color: white;
         }
 
-        .business-details a:hover {
-            text-decoration: underline;
+        .contact-btn.secondary {
+            background: var(--bg-primary);
+            color: var(--text-secondary);
+        }
+
+        .contact-btn:hover {
+            transform: scale(1.02);
         }
 
         /* Messages Page */
         .messages-layout {
             display: grid;
             grid-template-columns: 300px 1fr;
-            gap: 0;
-            height: 600px;
+            gap: 16px;
+            height: 500px;
+        }
+
+        .conversations-list {
+            background: var(--bg-card);
             border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
             overflow: hidden;
         }
 
-        .threads-panel {
-            background: var(--bg-card);
-            border-left: 1px solid var(--border);
-        }
-
-        .threads-header {
+        .conversations-header {
             padding: 16px;
             font-weight: 600;
             border-bottom: 1px solid var(--border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
         }
 
-        .threads-header i {
-            color: var(--text-muted);
-            cursor: pointer;
-        }
-
-        .thread-item {
-            padding: 12px 16px;
+        .conversation-item {
             display: flex;
             gap: 12px;
+            padding: 12px 16px;
             cursor: pointer;
-            transition: background 0.15s;
-            border-bottom: 1px solid var(--border-light);
+            transition: background 0.2s;
         }
 
-        .thread-item:hover {
-            background: var(--bg-primary);
-        }
-
-        .thread-item.active {
+        .conversation-item:hover, .conversation-item.active {
             background: var(--primary-light);
         }
 
-        .thread-avatar {
+        .conversation-avatar {
             width: 48px;
             height: 48px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             font-weight: 600;
-            flex-shrink: 0;
         }
 
-        .thread-info {
+        .conversation-info {
             flex: 1;
             min-width: 0;
         }
 
-        .thread-name {
+        .conversation-name {
             font-size: 14px;
             font-weight: 600;
         }
 
-        .thread-preview {
+        .conversation-preview {
             font-size: 12px;
             color: var(--text-muted);
             white-space: nowrap;
@@ -1216,26 +1243,22 @@
             text-overflow: ellipsis;
         }
 
-        .thread-time {
+        .conversation-time {
             font-size: 11px;
             color: var(--text-muted);
         }
 
-        .chat-panel {
+        .chat-area {
             background: var(--bg-card);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
             display: flex;
             flex-direction: column;
         }
 
         .chat-header {
-            padding: 12px 16px;
+            padding: 16px;
             border-bottom: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .chat-header-name {
             font-weight: 600;
         }
 
@@ -1245,70 +1268,157 @@
             overflow-y: auto;
         }
 
-        .message {
+        .chat-message {
             margin-bottom: 16px;
-            max-width: 70%;
         }
 
-        .message.sent {
-            margin-right: auto;
+        .chat-message.sent {
+            text-align: left;
         }
 
-        .message.received {
-            margin-left: auto;
+        .chat-message.received {
+            text-align: right;
         }
 
         .message-bubble {
-            padding: 12px 16px;
+            display: inline-block;
+            max-width: 70%;
+            padding: 10px 16px;
             border-radius: var(--radius-md);
             font-size: 14px;
         }
 
-        .message.sent .message-bubble {
+        .chat-message.sent .message-bubble {
             background: var(--primary);
             color: white;
-            border-bottom-right-radius: 4px;
-        }
-
-        .message.received .message-bubble {
-            background: var(--bg-primary);
-            color: var(--text-primary);
             border-bottom-left-radius: 4px;
         }
 
-        .message-time {
-            font-size: 11px;
-            margin-top: 4px;
-            color: var(--text-muted);
-        }
-
-        .message.sent .message-time {
-            text-align: right;
-        }
-
-        .chat-input-area {
-            padding: 12px 16px;
-            border-top: 1px solid var(--border);
-            display: flex;
-            gap: 8px;
+        .chat-message.received .message-bubble {
+            background: var(--bg-primary);
+            border-bottom-right-radius: 4px;
         }
 
         .chat-input {
+            padding: 16px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            gap: 12px;
+        }
+
+        .chat-input input {
             flex: 1;
-            padding: 10px 16px;
-            border: 1px solid var(--border);
-            border-radius: 20px;
+            padding: 12px 16px;
+            border: 2px solid var(--border);
+            border-radius: 24px;
             font-size: 14px;
             font-family: inherit;
         }
 
-        .chat-input:focus {
+        .chat-input input:focus {
             outline: none;
             border-color: var(--primary);
         }
 
         .send-btn {
-            padding: 8px 20px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+        }
+
+        .send-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* Profile Page */
+        .profile-hero {
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .profile-hero-cover {
+            height: 150px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+        }
+
+        .profile-hero-content {
+            padding: 0 24px 24px;
+            display: flex;
+            gap: 20px;
+        }
+
+        .profile-hero-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid var(--bg-card);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 40px;
+            font-weight: 700;
+            margin-top: -60px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .profile-hero-info {
+            flex: 1;
+            padding-top: 16px;
+        }
+
+        .profile-hero-name {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .profile-hero-headline {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+
+        .profile-hero-badges {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .hero-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 16px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .hero-badge.primary {
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+
+        .hero-badge.secondary {
+            background: var(--secondary-light);
+            color: var(--secondary);
+        }
+
+        .profile-edit-btn {
+            margin-top: 16px;
+            margin-right: auto;
+            padding: 10px 24px;
             background: var(--primary);
             color: white;
             border: none;
@@ -1316,359 +1426,82 @@
             font-size: 14px;
             font-weight: 600;
             cursor: pointer;
-            font-family: inherit;
+            transition: all 0.2s;
         }
 
-        .send-btn:hover {
+        .profile-edit-btn:hover {
             background: var(--primary-dark);
         }
 
-        /* Profile Page */
-        .profile-page-card {
-            padding: 0;
-            margin-bottom: 8px;
-        }
-
-        .profile-page-cover {
-            height: 200px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: var(--radius-md) var(--radius-md) 0 0;
-        }
-
-        .profile-page-content {
-            padding: 0 24px 24px;
-        }
-
-        .profile-page-avatar {
-            width: 152px;
-            height: 152px;
-            border-radius: 50%;
-            border: 4px solid white;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 48px;
-            font-weight: 700;
-            margin-top: -76px;
-        }
-
-        .profile-page-info {
-            margin-top: 16px;
-        }
-
-        .profile-page-name {
-            font-size: 24px;
-            font-weight: 600;
-        }
-
-        .profile-page-headline {
-            font-size: 16px;
-            color: var(--text-primary);
-            margin-top: 4px;
-        }
-
-        .profile-page-location {
-            font-size: 14px;
-            color: var(--text-muted);
-            margin-top: 4px;
-        }
-
-        .profile-page-actions {
-            margin-top: 16px;
-            display: flex;
-            gap: 8px;
-        }
-
-        .profile-btn {
-            padding: 6px 16px;
-            border-radius: 16px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            font-family: inherit;
-        }
-
-        .profile-btn-primary {
-            background: var(--primary);
-            color: white;
-            border: none;
-        }
-
-        .profile-btn-secondary {
-            background: transparent;
-            color: var(--primary);
-            border: 1px solid var(--primary);
-        }
-
         .profile-section {
-            padding: 20px 24px;
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+            padding: 24px;
+            margin-top: 16px;
+            box-shadow: var(--shadow-sm);
         }
 
         .profile-section-title {
             font-size: 18px;
             font-weight: 600;
-            margin-bottom: 12px;
-        }
-
-        .profile-about {
-            font-size: 14px;
-            line-height: 1.6;
-            color: var(--text-primary);
-        }
-
-        .profile-form {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
-        }
-
-        .form-group {
-            margin-bottom: 0;
-        }
-
-        .form-group.full-width {
-            grid-column: 1 / -1;
-        }
-
-        .form-label {
-            display: block;
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 6px;
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 10px 12px;
-            border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
-            font-size: 14px;
-            font-family: inherit;
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(10, 102, 194, 0.1);
-        }
-
-        .form-textarea {
-            min-height: 100px;
-            resize: vertical;
-        }
-
-        .save-btn {
-            padding: 10px 24px;
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 24px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            font-family: inherit;
-            margin-top: 16px;
-        }
-
-        .save-btn:hover {
-            background: var(--primary-dark);
-        }
-
-        /* Batch Overview */
-        .batch-hero {
-            padding: 32px;
-            text-align: center;
-        }
-
-        .batch-title {
-            font-size: 28px;
-            font-weight: 700;
-        }
-
-        .batch-subtitle {
-            font-size: 14px;
-            color: var(--text-muted);
-            margin-top: 4px;
-        }
-
-        .batch-description {
-            max-width: 600px;
-            margin: 16px auto 0;
-            font-size: 14px;
-            color: var(--text-secondary);
-        }
-
-        .batch-stats {
+            margin-bottom: 16px;
             display: flex;
-            justify-content: center;
-            gap: 48px;
-            margin-top: 24px;
-            padding-top: 24px;
-            border-top: 1px solid var(--border);
-        }
-
-        .batch-stat {
-            text-align: center;
-        }
-
-        .batch-stat-value {
-            font-size: 32px;
-            font-weight: 700;
-            color: var(--primary);
-        }
-
-        .batch-stat-label {
-            font-size: 14px;
-            color: var(--text-muted);
-        }
-
-        .quick-links-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            align-items: center;
             gap: 8px;
-            margin-top: 16px;
         }
 
-        .quick-link {
-            padding: 20px;
-            background: var(--bg-card);
-            border-radius: var(--radius-md);
-            box-shadow: var(--shadow-sm);
-            cursor: pointer;
-            transition: all 0.15s;
-        }
-
-        .quick-link:hover {
-            box-shadow: var(--shadow-md);
-            transform: translateY(-2px);
-        }
-
-        .quick-link-title {
-            font-size: 16px;
-            font-weight: 600;
-        }
-
-        .quick-link-desc {
-            font-size: 12px;
+        /* Disclaimer */
+        .disclaimer {
+            text-align: center;
+            padding: 24px;
             color: var(--text-muted);
-            margin-top: 4px;
+            font-size: 12px;
         }
 
-        /* Page Header */
-        .page-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
+        .disclaimer a {
+            color: var(--primary);
+            text-decoration: none;
         }
 
-        .page-title {
-            font-size: 20px;
-            font-weight: 600;
-        }
-
-        .new-btn {
-            padding: 8px 16px;
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            font-family: inherit;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .new-btn:hover {
-            background: var(--primary-dark);
-        }
-
-        /* Filter */
-        .filter-bar {
-            margin-bottom: 16px;
-        }
-
-        .filter-select {
-            padding: 8px 32px 8px 12px;
-            border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
-            font-size: 14px;
-            font-family: inherit;
-            background: var(--bg-card);
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
-            background-position: left 8px center;
-            background-repeat: no-repeat;
-            background-size: 16px;
-            cursor: pointer;
-        }
-
-        /* Mobile Responsive */
-        @media (max-width: 1150px) {
+        /* Responsive */
+        @media (max-width: 1024px) {
             .main-layout {
                 grid-template-columns: 1fr;
             }
 
-            .profile-sidebar,
-            .right-sidebar {
+            .left-sidebar, .right-sidebar {
                 display: none;
+            }
+
+            .business-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .messages-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .conversations-list {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-items {
+                gap: 4px;
+            }
+
+            .nav-item {
+                padding: 8px;
+                min-width: auto;
             }
 
             .nav-item span {
                 display: none;
             }
 
-            .nav-item {
-                min-width: auto;
-                padding: 4px 8px;
-            }
-
-            .search-box {
-                max-width: 200px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .top-nav-content {
-                padding: 0 8px;
-            }
-
-            .search-box {
-                display: none;
-            }
-
-            .messages-layout {
-                grid-template-columns: 1fr;
-                height: auto;
-            }
-
-            .threads-panel {
-                border-left: none;
-                border-bottom: 1px solid var(--border);
-            }
-
-            .directory-grid,
-            .quick-links-grid,
-            .profile-form {
-                grid-template-columns: 1fr;
-            }
-
-            .batch-stats {
-                gap: 24px;
-            }
-
-            .event-card-header {
-                flex-direction: column;
-            }
-
-            .event-card-datetime {
-                text-align: right;
+            .welcome-stats {
+                gap: 16px;
             }
         }
     </style>
@@ -1678,35 +1511,31 @@
     <nav class="top-nav">
         <div class="top-nav-content">
             <div class="logo-section">
-                <div class="logo">A</div>
-                <div class="search-box">
-                    <i class="fas fa-search"></i>
-                    <input type="text" placeholder="חיפוש">
+                <div class="logo">🎓</div>
+                <div class="logo-text">
+                    מחזור 2003
+                    <span>תיכון חדרה</span>
                 </div>
             </div>
 
             <div class="nav-items">
                 <button class="nav-item active" onclick="showPage('feed')">
                     <i class="fas fa-home"></i>
-                    <span>דף הבית</span>
-                </button>
-                <button class="nav-item" onclick="showPage('batch')">
-                    <i class="fas fa-users"></i>
-                    <span>המחזור</span>
+                    <span>בית</span>
                 </button>
                 <button class="nav-item" onclick="showPage('events')">
-                    <i class="fas fa-calendar-alt"></i>
+                    <i class="fas fa-calendar-star"></i>
                     <span>אירועים</span>
                 </button>
                 <button class="nav-item" onclick="showPage('directory')">
-                    <i class="fas fa-briefcase"></i>
+                    <i class="fas fa-store"></i>
                     <span>עסקים</span>
                 </button>
                 <button class="nav-item" onclick="showPage('messages')">
-                    <i class="fas fa-comment-dots"></i>
+                    <i class="fas fa-comments"></i>
                     <span>הודעות</span>
                 </button>
-                <button class="nav-item nav-user" onclick="showPage('profile')">
+                <button class="nav-item" onclick="showPage('profile')">
                     <div class="nav-user-avatar">דכ</div>
                     <span>אני</span>
                 </button>
@@ -1717,138 +1546,117 @@
     <div class="app-container">
         <div class="main-layout">
             <!-- Left Sidebar -->
-            <aside class="profile-sidebar">
+            <aside class="left-sidebar">
+                <!-- Profile Card -->
                 <div class="profile-card">
                     <div class="profile-cover"></div>
-                    <div class="profile-card-content">
-                        <div class="profile-avatar-wrapper">
-                            <div class="profile-avatar">דכ</div>
+                    <div class="profile-content">
+                        <div class="profile-avatar">דכ</div>
+                        <div class="profile-name">דוד כהן</div>
+                        <div class="profile-headline">מנהל פיתוח | 10+ שנות ניסיון</div>
+                        <div class="profile-badge">
+                            <i class="fas fa-star"></i>
+                            חבר מחזור פעיל
                         </div>
-                        <div class="profile-name" onclick="showPage('profile')">דוד כהן</div>
-                        <div class="profile-headline">מנהל פיתוח | 10+ שנות ניסיון בהובלת צוותים</div>
                     </div>
-                    <div class="profile-stats">
-                        <div class="profile-stat">
-                            <span>צפיות בפרופיל</span>
-                            <span>127</span>
+                    <div class="quick-stats">
+                        <div class="quick-stat">
+                            <div class="quick-stat-value">127</div>
+                            <div class="quick-stat-label">צפיות בפרופיל</div>
                         </div>
-                        <div class="profile-stat">
-                            <span>חיבורים</span>
-                            <span>89</span>
+                        <div class="quick-stat">
+                            <div class="quick-stat-value">89</div>
+                            <div class="quick-stat-label">חברי מחזור</div>
                         </div>
                     </div>
                 </div>
 
-                <div class="sidebar-nav">
-                    <button class="sidebar-nav-item active" onclick="showPage('feed')">
+                <!-- Navigation Menu -->
+                <div class="nav-menu">
+                    <button class="nav-menu-item active" onclick="showPage('feed')">
                         <i class="fas fa-newspaper"></i>
                         פיד המחזור
                     </button>
-                    <button class="sidebar-nav-item" onclick="showPage('events')">
+                    <button class="nav-menu-item" onclick="showPage('events')">
                         <i class="fas fa-calendar-check"></i>
-                        אירועים קרובים
+                        אירועים
+                        <span class="badge">3</span>
                     </button>
-                    <button class="sidebar-nav-item" onclick="showPage('directory')">
-                        <i class="fas fa-store"></i>
-                        מדריך עסקים
+                    <button class="nav-menu-item" onclick="showPage('directory')">
+                        <i class="fas fa-briefcase"></i>
+                        עסקים של חברים
+                    </button>
+                    <button class="nav-menu-item" onclick="showPage('messages')">
+                        <i class="fas fa-envelope"></i>
+                        הודעות
                     </button>
                 </div>
 
                 <!-- Batch Members -->
                 <div class="batch-members">
                     <div class="batch-members-header">
-                        <span>חברי המחזור</span>
-                        <span class="batch-members-count">89 רשומים</span>
+                        <span>👥 חברי המחזור</span>
+                        <span class="online-count">4 מחוברים</span>
                     </div>
                     <div class="batch-members-list">
-                        <div class="batch-member-item" onclick="showPage('profile')">
-                            <div class="batch-member-avatar" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                        <div class="member-item">
+                            <div class="member-avatar" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
                                 דכ
-                                <span class="online-indicator online"></span>
+                                <span class="online-dot online"></span>
                             </div>
-                            <div class="batch-member-info">
-                                <div class="batch-member-name">דוד כהן (את/ה)</div>
-                                <div class="batch-member-status online">מחובר עכשיו</div>
+                            <div class="member-info">
+                                <div class="member-name">דוד כהן (את/ה)</div>
+                                <div class="member-status" style="color: var(--success);">מחובר</div>
                             </div>
                         </div>
-                        <div class="batch-member-item">
-                            <div class="batch-member-avatar" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                        <div class="member-item">
+                            <div class="member-avatar" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
                                 רל
-                                <span class="online-indicator online"></span>
+                                <span class="online-dot online"></span>
                             </div>
-                            <div class="batch-member-info">
-                                <div class="batch-member-name">רונית לוי</div>
-                                <div class="batch-member-status online">מחוברת עכשיו</div>
+                            <div class="member-info">
+                                <div class="member-name">רונית לוי</div>
+                                <div class="member-status" style="color: var(--success);">מחוברת</div>
                             </div>
                         </div>
-                        <div class="batch-member-item">
-                            <div class="batch-member-avatar" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                        <div class="member-item">
+                            <div class="member-avatar" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
                                 מא
-                                <span class="online-indicator online"></span>
+                                <span class="online-dot online"></span>
                             </div>
-                            <div class="batch-member-info">
-                                <div class="batch-member-name">מיכל אברהם</div>
-                                <div class="batch-member-status online">מחוברת עכשיו</div>
+                            <div class="member-info">
+                                <div class="member-name">מיכל אברהם</div>
+                                <div class="member-status" style="color: var(--success);">מחוברת</div>
                             </div>
                         </div>
-                        <div class="batch-member-item">
-                            <div class="batch-member-avatar" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                        <div class="member-item">
+                            <div class="member-avatar" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
                                 יכ
-                                <span class="online-indicator online"></span>
+                                <span class="online-dot online"></span>
                             </div>
-                            <div class="batch-member-info">
-                                <div class="batch-member-name">יוסי כץ</div>
-                                <div class="batch-member-status online">מחובר עכשיו</div>
+                            <div class="member-info">
+                                <div class="member-name">יוסי כץ</div>
+                                <div class="member-status" style="color: var(--success);">מחובר</div>
                             </div>
                         </div>
-                        <div class="batch-member-item">
-                            <div class="batch-member-avatar" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+                        <div class="member-item">
+                            <div class="member-avatar" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
                                 שג
-                                <span class="online-indicator offline"></span>
+                                <span class="online-dot"></span>
                             </div>
-                            <div class="batch-member-info">
-                                <div class="batch-member-name">שרה גולן</div>
-                                <div class="batch-member-status">לפני 15 דקות</div>
+                            <div class="member-info">
+                                <div class="member-name">שרה גולן</div>
+                                <div class="member-status">לפני 15 דקות</div>
                             </div>
                         </div>
-                        <div class="batch-member-item">
-                            <div class="batch-member-avatar" style="background: linear-gradient(135deg, #d299c2 0%, #fef9d7 100%);">
+                        <div class="member-item">
+                            <div class="member-avatar" style="background: linear-gradient(135deg, #d299c2 0%, #fef9d7 100%);">
                                 אמ
-                                <span class="online-indicator offline"></span>
+                                <span class="online-dot"></span>
                             </div>
-                            <div class="batch-member-info">
-                                <div class="batch-member-name">אבי מזרחי</div>
-                                <div class="batch-member-status">לפני שעה</div>
-                            </div>
-                        </div>
-                        <div class="batch-member-item">
-                            <div class="batch-member-avatar" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-                                נר
-                                <span class="online-indicator offline"></span>
-                            </div>
-                            <div class="batch-member-info">
-                                <div class="batch-member-name">נועה רביב</div>
-                                <div class="batch-member-status">לפני 2 שעות</div>
-                            </div>
-                        </div>
-                        <div class="batch-member-item">
-                            <div class="batch-member-avatar" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
-                                עש
-                                <span class="online-indicator offline"></span>
-                            </div>
-                            <div class="batch-member-info">
-                                <div class="batch-member-name">עומר שפירא</div>
-                                <div class="batch-member-status">לפני 3 שעות</div>
-                            </div>
-                        </div>
-                        <div class="batch-member-item">
-                            <div class="batch-member-avatar" style="background: linear-gradient(135deg, #f5576c 0%, #f093fb 100%);">
-                                לב
-                                <span class="online-indicator offline"></span>
-                            </div>
-                            <div class="batch-member-info">
-                                <div class="batch-member-name">לירון ביטון</div>
-                                <div class="batch-member-status">לפני יום</div>
+                            <div class="member-info">
+                                <div class="member-name">אבי מזרחי</div>
+                                <div class="member-status">לפני שעה</div>
                             </div>
                         </div>
                     </div>
@@ -1859,76 +1667,85 @@
             <main class="main-content">
                 <!-- Feed Page -->
                 <div id="page-feed" class="page active">
+                    <!-- Welcome Banner -->
+                    <div class="card welcome-banner">
+                        <div class="welcome-title">שלום דוד! 👋</div>
+                        <div class="welcome-subtitle">ברוכים הבאים לבית של מחזור 2003</div>
+                        <div class="welcome-stats">
+                            <div class="welcome-stat">
+                                <div class="welcome-stat-value">89</div>
+                                <div class="welcome-stat-label">חברי מחזור</div>
+                            </div>
+                            <div class="welcome-stat">
+                                <div class="welcome-stat-value">21</div>
+                                <div class="welcome-stat-label">שנים מאז סיום</div>
+                            </div>
+                            <div class="welcome-stat">
+                                <div class="welcome-stat-value">3</div>
+                                <div class="welcome-stat-label">אירועים קרובים</div>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Create Post -->
-                    <div class="card create-post-box">
+                    <div class="card create-post">
                         <div class="create-post-header">
                             <div class="create-post-avatar">דכ</div>
-                            <input type="text" class="create-post-input" placeholder="התחל פוסט">
+                            <input type="text" class="create-post-input" placeholder="מה קורה אצלך? שתף את המחזור...">
                         </div>
                         <div class="create-post-actions">
-                            <button class="create-post-action photo">
-                                <i class="fas fa-image"></i>
-                                תמונה
+                            <button class="create-action memory">
+                                <i class="fas fa-camera-retro"></i>
+                                זיכרון מהתיכון
                             </button>
-                            <button class="create-post-action event">
-                                <i class="fas fa-calendar-plus"></i>
-                                אירוע
+                            <button class="create-action help">
+                                <i class="fas fa-hands-helping"></i>
+                                צריך עזרה
                             </button>
-                            <button class="create-post-action article">
-                                <i class="fas fa-pen-fancy"></i>
-                                מאמר
+                            <button class="create-action event">
+                                <i class="fas fa-glass-cheers"></i>
+                                יוזם מפגש
                             </button>
                         </div>
                     </div>
 
-                    <!-- Post 1 -->
+                    <!-- Post 1 - Memory -->
                     <div class="card post-card">
                         <div class="post-header">
                             <div class="post-avatar" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">רל</div>
                             <div class="post-meta">
                                 <div class="post-author">
                                     רונית לוי
-                                    <span class="post-badge opportunity">הזדמנות</span>
+                                    <span class="post-type memory">🎞️ זיכרון</span>
                                 </div>
-                                <div class="post-headline">סמנכ"לית שיווק @ דיגיטל פלוס</div>
+                                <div class="post-headline">סמנכ"לית שיווק</div>
                                 <div class="post-time">
-                                    <span>3 שעות</span>
-                                    <i class="fas fa-globe-americas"></i>
+                                    <span>לפני 3 שעות</span>
+                                    <i class="fas fa-globe"></i>
                                 </div>
-                            </div>
-                            <div class="post-menu">
-                                <i class="fas fa-ellipsis-h"></i>
                             </div>
                         </div>
                         <div class="post-content">
-                            <h3 class="post-title">מחפשת מפתח/ת Full-Stack לסטארטאפ</h3>
-                            <p class="post-text">היי לכולם! 👋
-
-אנחנו בסטארטאפ בתחום ה-FinTech מחפשים מפתח/ת Full-Stack עם ניסיון של 3+ שנים.
-
-דרישות:
-• React / Next.js
-• Node.js
-• PostgreSQL
-• ניסיון עם AWS
-
-אם מישהו מכם מתעניין או מכיר מישהו מתאים - שלחו לי הודעה פרטית!
-
-<span class="hashtag">#גיוס</span> <span class="hashtag">#הייטק</span> <span class="hashtag">#חדרה2003</span></p>
+                            <p class="post-text">
+                                מצאתי היום תמונה מטיול השנתי לאילת! 🌊 מי זוכר את הלילה שישנו על החוף ושרנו עד הבוקר?
+                                <br><br>
+                                @מיכל אברהם @יוסי כץ - אתם שם בתמונה! 😂
+                            </p>
                         </div>
                         <div class="post-stats">
                             <div class="post-reactions">
                                 <div class="reaction-icons">
-                                    <span class="reaction-icon like"><i class="fas fa-thumbs-up"></i></span>
-                                    <span class="reaction-icon celebrate"><i class="fas fa-hands-clapping"></i></span>
+                                    <span>❤️</span>
+                                    <span>😂</span>
+                                    <span>🥹</span>
                                 </div>
-                                <span>23</span>
+                                <span>24 תגובות</span>
                             </div>
-                            <span class="post-comments-count">8 תגובות</span>
+                            <span>12 תגובות</span>
                         </div>
                         <div class="post-actions">
                             <button class="post-action">
-                                <i class="far fa-thumbs-up"></i>
+                                <i class="far fa-heart"></i>
                                 אהבתי
                             </button>
                             <button class="post-action">
@@ -1936,72 +1753,66 @@
                                 תגובה
                             </button>
                             <button class="post-action">
-                                <i class="fas fa-share"></i>
+                                <i class="far fa-share-square"></i>
                                 שיתוף
                             </button>
-                            <button class="post-action">
-                                <i class="far fa-paper-plane"></i>
-                                שליחה
-                            </button>
                         </div>
-                        <div class="comments-section">
+                        <div class="post-comments">
                             <div class="comment">
-                                <div class="comment-avatar" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">יכ</div>
-                                <div class="comment-body">
-                                    <div class="comment-author">יוסי כהן <span class="comment-author-headline">• CTO</span></div>
-                                    <p class="comment-text">שלחתי לך פרטים בהודעה! יש לי מועמד מעולה</p>
-                                    <div class="comment-actions">
-                                        <span class="comment-action">אהבתי</span>
-                                        <span class="comment-action">תגובה</span>
-                                        <span>• 2 שעות</span>
-                                    </div>
+                                <div class="comment-avatar" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">מא</div>
+                                <div class="comment-content">
+                                    <div class="comment-author">מיכל אברהם</div>
+                                    <div class="comment-text">וואו!! איזה נוסטלגיה 🥹 אני זוכרת שלא ישנתי כל הלילה!</div>
                                 </div>
                             </div>
-                            <div class="comment-input-wrapper">
-                                <div class="comment-avatar">דכ</div>
-                                <input type="text" class="comment-input" placeholder="הוסף תגובה...">
+                            <div class="comment">
+                                <div class="comment-avatar" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">יכ</div>
+                                <div class="comment-content">
+                                    <div class="comment-author">יוסי כץ</div>
+                                    <div class="comment-text">הייתי בטוח שהתמונה הזו נעלמה! תעלי עוד!! 📸</div>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Post 2 -->
+                    <!-- Post 2 - Help Request -->
                     <div class="card post-card">
                         <div class="post-header">
-                            <div class="post-avatar" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); color: #333;">מש</div>
+                            <div class="post-avatar" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">שג</div>
                             <div class="post-meta">
                                 <div class="post-author">
-                                    מיכל שמעון
-                                    <span class="post-badge general">כללי</span>
+                                    שרה גולן
+                                    <span class="post-type help">🤝 צריכה עזרה</span>
                                 </div>
-                                <div class="post-headline">עורכת דין @ כהן ושות'</div>
+                                <div class="post-headline">עורכת דין</div>
                                 <div class="post-time">
-                                    <span>יום</span>
-                                    <i class="fas fa-globe-americas"></i>
+                                    <span>לפני 5 שעות</span>
+                                    <i class="fas fa-globe"></i>
                                 </div>
-                            </div>
-                            <div class="post-menu">
-                                <i class="fas fa-ellipsis-h"></i>
                             </div>
                         </div>
                         <div class="post-content">
-                            <h3 class="post-title">מי מגיע למפגש בתל אביב? 🎉</h3>
-                            <p class="post-text">שמעתי שמתכננים מפגש מחזור בחודש הבא - מי כבר אישר הגעה?
-
-כמה זמן לא נפגשנו כולנו ביחד! יהיה מדהים לראות את כולם 💜</p>
+                            <p class="post-text">
+                                היי חברים! 💼
+                                <br><br>
+                                מישהו מכיר מישהו בתחום הפיננסים? אני מחפשת שותף להשקעה בנדל"ן בתל אביב.
+                                <br><br>
+                                אשמח להמלצות או חיבורים! 🙏
+                            </p>
                         </div>
                         <div class="post-stats">
                             <div class="post-reactions">
                                 <div class="reaction-icons">
-                                    <span class="reaction-icon like"><i class="fas fa-thumbs-up"></i></span>
-                                    <span class="reaction-icon love"><i class="fas fa-heart"></i></span>
+                                    <span>👍</span>
+                                    <span>💪</span>
                                 </div>
-                                <span>45</span>
+                                <span>8 תגובות</span>
                             </div>
-                            <span class="post-comments-count">12 תגובות</span>
+                            <span>5 תגובות</span>
                         </div>
                         <div class="post-actions">
-                            <button class="post-action active">
-                                <i class="fas fa-thumbs-up"></i>
+                            <button class="post-action">
+                                <i class="far fa-heart"></i>
                                 אהבתי
                             </button>
                             <button class="post-action">
@@ -2009,51 +1820,53 @@
                                 תגובה
                             </button>
                             <button class="post-action">
-                                <i class="fas fa-share"></i>
+                                <i class="far fa-share-square"></i>
                                 שיתוף
-                            </button>
-                            <button class="post-action">
-                                <i class="far fa-paper-plane"></i>
-                                שליחה
                             </button>
                         </div>
                     </div>
 
-                    <!-- Post 3 -->
+                    <!-- Post 3 - Celebration -->
                     <div class="card post-card">
                         <div class="post-header">
-                            <div class="post-avatar" style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); color: #333;">אב</div>
+                            <div class="post-avatar" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">עש</div>
                             <div class="post-meta">
                                 <div class="post-author">
-                                    אורי בן-דוד
-                                    <span class="post-badge question">שאלה</span>
+                                    עומר שפירא
+                                    <span class="post-type celebration">🎉 חגיגה</span>
                                 </div>
-                                <div class="post-headline">יועץ עסקי | מלווה סטארטאפים</div>
+                                <div class="post-headline">יזם ומייסד</div>
                                 <div class="post-time">
-                                    <span>3 ימים</span>
-                                    <i class="fas fa-globe-americas"></i>
+                                    <span>אתמול</span>
+                                    <i class="fas fa-globe"></i>
                                 </div>
-                            </div>
-                            <div class="post-menu">
-                                <i class="fas fa-ellipsis-h"></i>
                             </div>
                         </div>
                         <div class="post-content">
-                            <h3 class="post-title">המלצה על רואה חשבון?</h3>
-                            <p class="post-text">מישהו יכול להמליץ על רואה חשבון טוב לעסק קטן? מחפש מישהו עם ניסיון בסטארטאפים ובהטבות מס למשקיעים.</p>
+                            <p class="post-text">
+                                שמחים לבשר! 🚀
+                                <br><br>
+                                הסטארטאפ שלנו סגר היום סבב גיוס של 5 מיליון דולר!
+                                <br><br>
+                                תודה לכל מי שהאמין בנו מההתחלה - כולל כמה חברים מהמחזור שלנו!
+                                <br><br>
+                                גאה להיות חלק מהמחזור הכי טוב! 💜
+                            </p>
                         </div>
                         <div class="post-stats">
                             <div class="post-reactions">
                                 <div class="reaction-icons">
-                                    <span class="reaction-icon like"><i class="fas fa-thumbs-up"></i></span>
+                                    <span>🎉</span>
+                                    <span>❤️</span>
+                                    <span>👏</span>
                                 </div>
-                                <span>7</span>
+                                <span>67 תגובות</span>
                             </div>
-                            <span class="post-comments-count">4 תגובות</span>
+                            <span>34 תגובות</span>
                         </div>
                         <div class="post-actions">
                             <button class="post-action">
-                                <i class="far fa-thumbs-up"></i>
+                                <i class="far fa-heart"></i>
                                 אהבתי
                             </button>
                             <button class="post-action">
@@ -2061,115 +1874,108 @@
                                 תגובה
                             </button>
                             <button class="post-action">
-                                <i class="fas fa-share"></i>
+                                <i class="far fa-share-square"></i>
                                 שיתוף
                             </button>
-                            <button class="post-action">
-                                <i class="far fa-paper-plane"></i>
-                                שליחה
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Batch Page -->
-                <div id="page-batch" class="page">
-                    <div class="card batch-hero">
-                        <h1 class="batch-title">מחזור חדרה 2003</h1>
-                        <p class="batch-subtitle">תיכון חדרה • חדרה, ישראל</p>
-                        <p class="batch-description">ברוכים הבאים לקהילת בוגרי תיכון חדרה מחזור 2003. כאן תוכלו להתחבר מחדש עם חברים, לשתף הזדמנויות מקצועיות, ולהשתתף באירועי מפגש.</p>
-                        <div class="batch-stats">
-                            <div class="batch-stat">
-                                <div class="batch-stat-value">127</div>
-                                <div class="batch-stat-label">חברים</div>
-                            </div>
-                            <div class="batch-stat">
-                                <div class="batch-stat-value">45</div>
-                                <div class="batch-stat-label">פוסטים</div>
-                            </div>
-                            <div class="batch-stat">
-                                <div class="batch-stat-value">8</div>
-                                <div class="batch-stat-label">אירועים</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="quick-links-grid">
-                        <div class="quick-link" onclick="showPage('feed')">
-                            <div class="quick-link-title">📰 פיד המחזור</div>
-                            <p class="quick-link-desc">צפייה בפוסטים ועדכונים מחברי המחזור</p>
-                        </div>
-                        <div class="quick-link" onclick="showPage('events')">
-                            <div class="quick-link-title">📅 אירועים</div>
-                            <p class="quick-link-desc">מפגשים ואירועי מחזור</p>
-                        </div>
-                        <div class="quick-link" onclick="showPage('directory')">
-                            <div class="quick-link-title">💼 מדריך עסקים</div>
-                            <p class="quick-link-desc">עסקים ושירותים של בוגרי המחזור</p>
-                        </div>
-                        <div class="quick-link" onclick="showPage('messages')">
-                            <div class="quick-link-title">💬 הודעות</div>
-                            <p class="quick-link-desc">תקשורת עם חברי המחזור</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- Events Page -->
                 <div id="page-events" class="page">
-                    <div class="page-header">
-                        <h1 class="page-title">אירועים קרובים</h1>
-                        <button class="new-btn">
-                            <i class="fas fa-plus"></i>
-                            אירוע חדש
-                        </button>
+                    <div class="card" style="padding: 20px;">
+                        <h2 style="margin-bottom: 8px;">🎉 אירועי המחזור</h2>
+                        <p style="color: var(--text-secondary); font-size: 14px;">כל המפגשים והאירועים של מחזור 2003</p>
                     </div>
 
-                    <div class="card event-card">
-                        <div class="event-card-header">
-                            <div>
-                                <h3 class="event-card-title">מפגש מחזור - 20 שנה! 🎉</h3>
-                                <p class="event-card-creator">נוצר על ידי רונית לוי</p>
+                    <div class="events-grid">
+                        <div class="event-card">
+                            <div class="event-card-header">
+                                <div class="event-card-date">שישי, 15 בדצמבר 2024</div>
+                                <div class="event-card-title">🍻 מפגש חברים - פאב הרצליה</div>
                             </div>
-                            <div class="event-card-datetime">
-                                <div class="event-card-date">יום שישי, 15 בדצמבר</div>
-                                <div class="event-card-time">20:00</div>
+                            <div class="event-card-body">
+                                <div class="event-card-info">
+                                    <i class="fas fa-clock"></i>
+                                    20:00
+                                </div>
+                                <div class="event-card-info">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    The Pub, הרצליה פיתוח
+                                </div>
+                                <div class="event-card-info">
+                                    <i class="fas fa-user"></i>
+                                    יוזם: רונית לוי
+                                </div>
+                                <div class="event-attendees">
+                                    <div class="attendee-avatars">
+                                        <div class="attendee-avatar" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">רל</div>
+                                        <div class="attendee-avatar" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">מא</div>
+                                        <div class="attendee-avatar" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">יכ</div>
+                                        <div class="attendee-avatar" style="background: var(--border); color: var(--text-secondary);">+12</div>
+                                    </div>
+                                    <span class="attendee-count">15 מגיעים</span>
+                                    <button class="event-rsvp-btn">אני מגיע! 🙋</button>
+                                </div>
                             </div>
                         </div>
-                        <p class="event-card-description">חוגגים 20 שנה לסיום התיכון! בואו לערב נוסטלגיה עם אוכל, שתייה והרבה זיכרונות. נחכה לכולם!</p>
-                        <p class="event-card-location">
-                            <i class="fas fa-map-marker-alt"></i>
-                            מסעדת "הגינה", רחוב דיזנגוף 99, תל אביב
-                        </p>
-                        <div class="event-card-footer">
-                            <span class="event-card-attendees">32 מאשרים הגעה</span>
-                            <div class="rsvp-buttons">
-                                <button class="rsvp-btn going">מגיע ✓</button>
-                                <button class="rsvp-btn default">אולי</button>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="card event-card">
-                        <div class="event-card-header">
-                            <div>
-                                <h3 class="event-card-title">נטוורקינג בוקר ☕</h3>
-                                <p class="event-card-creator">נוצר על ידי יוסי כהן</p>
+                        <div class="event-card">
+                            <div class="event-card-header">
+                                <div class="event-card-date">שבת, 28 בדצמבר 2024</div>
+                                <div class="event-card-title">🎄 מסיבת סוף שנה</div>
                             </div>
-                            <div class="event-card-datetime">
-                                <div class="event-card-date">יום רביעי, 20 בדצמבר</div>
-                                <div class="event-card-time">08:00</div>
+                            <div class="event-card-body">
+                                <div class="event-card-info">
+                                    <i class="fas fa-clock"></i>
+                                    21:00
+                                </div>
+                                <div class="event-card-info">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    הגן של דניאל, תל אביב
+                                </div>
+                                <div class="event-card-info">
+                                    <i class="fas fa-user"></i>
+                                    יוזם: עומר שפירא
+                                </div>
+                                <div class="event-attendees">
+                                    <div class="attendee-avatars">
+                                        <div class="attendee-avatar" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">עש</div>
+                                        <div class="attendee-avatar" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">דכ</div>
+                                        <div class="attendee-avatar" style="background: var(--border); color: var(--text-secondary);">+28</div>
+                                    </div>
+                                    <span class="attendee-count">30 מגיעים</span>
+                                    <button class="event-rsvp-btn">אני מגיע! 🙋</button>
+                                </div>
                             </div>
                         </div>
-                        <p class="event-card-description">מפגש נטוורקינג לבוגרי המחזור - הזדמנות להכיר שיתופי פעולה עסקיים. קפה וכיבוד קל על חשבון הבית.</p>
-                        <p class="event-card-location">
-                            <i class="fas fa-map-marker-alt"></i>
-                            WeWork, רחוב הברזל 3, הרצליה פיתוח
-                        </p>
-                        <div class="event-card-footer">
-                            <span class="event-card-attendees">15 מאשרים הגעה / 25 מקומות</span>
-                            <div class="rsvp-buttons">
-                                <button class="rsvp-btn default">מגיע</button>
-                                <button class="rsvp-btn maybe">אולי ✓</button>
+
+                        <div class="event-card">
+                            <div class="event-card-header" style="background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);">
+                                <div class="event-card-date">שישי, 10 בינואר 2025</div>
+                                <div class="event-card-title">☕ קפה עם בוגר - נטוורקינג</div>
+                            </div>
+                            <div class="event-card-body">
+                                <div class="event-card-info">
+                                    <i class="fas fa-clock"></i>
+                                    10:00
+                                </div>
+                                <div class="event-card-info">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    קפה לנדוור, חדרה
+                                </div>
+                                <div class="event-card-info">
+                                    <i class="fas fa-user"></i>
+                                    יוזמת: שרה גולן
+                                </div>
+                                <div class="event-attendees">
+                                    <div class="attendee-avatars">
+                                        <div class="attendee-avatar" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">שג</div>
+                                        <div class="attendee-avatar" style="background: var(--border); color: var(--text-secondary);">+5</div>
+                                    </div>
+                                    <span class="attendee-count">6 מגיעים</span>
+                                    <button class="event-rsvp-btn">אני מגיע! 🙋</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -2177,85 +1983,110 @@
 
                 <!-- Directory Page -->
                 <div id="page-directory" class="page">
-                    <div class="page-header">
-                        <h1 class="page-title">מדריך עסקים</h1>
-                        <button class="new-btn">
-                            <i class="fas fa-plus"></i>
-                            הוספת עסק
-                        </button>
+                    <div class="card" style="padding: 20px;">
+                        <h2 style="margin-bottom: 8px;">💼 עסקים של חברי המחזור</h2>
+                        <p style="color: var(--text-secondary); font-size: 14px;">תמכו בעסקים של חברים!</p>
                     </div>
 
-                    <div class="filter-bar">
-                        <select class="filter-select">
-                            <option>כל הקטגוריות</option>
-                            <option>עורכי דין</option>
-                            <option>רואי חשבון</option>
-                            <option>שיווק</option>
-                            <option>טכנולוגיה</option>
-                            <option>נדל"ן</option>
-                        </select>
+                    <div class="directory-filters">
+                        <button class="filter-btn active">הכל</button>
+                        <button class="filter-btn">טכנולוגיה</button>
+                        <button class="filter-btn">עיצוב</button>
+                        <button class="filter-btn">שיווק</button>
+                        <button class="filter-btn">משפטים</button>
+                        <button class="filter-btn">בריאות</button>
                     </div>
 
-                    <div class="directory-grid">
-                        <div class="card business-card">
-                            <div class="business-card-header">
+                    <div class="business-grid">
+                        <div class="business-card">
+                            <div class="business-header">
+                                <div class="business-logo" style="background: var(--primary-light);">🚀</div>
                                 <div>
-                                    <h3 class="business-name">שמעון ושות' - רואי חשבון</h3>
-                                    <p class="business-owner">שלומי שמעון</p>
+                                    <div class="business-name">TechFlow</div>
+                                    <div class="business-category">פיתוח תוכנה</div>
                                 </div>
-                                <span class="business-category">רואי חשבון</span>
                             </div>
-                            <p class="business-description">משרד רואי חשבון המתמחה בליווי סטארטאפים ועסקים קטנים. ניסיון של 15 שנה בהטבות מס למשקיעים.</p>
-                            <div class="business-details">
-                                <span><i class="fas fa-map-marker-alt"></i> תל אביב</span>
-                                <span><i class="fas fa-phone"></i> 050-1234567</span>
-                                <a href="#"><i class="fas fa-globe"></i> אתר</a>
+                            <div class="business-owner">
+                                <i class="fas fa-user"></i> עומר שפירא
+                            </div>
+                            <div class="business-contact">
+                                <button class="contact-btn primary">
+                                    <i class="fas fa-phone"></i>
+                                    התקשר
+                                </button>
+                                <button class="contact-btn secondary">
+                                    <i class="fas fa-globe"></i>
+                                    אתר
+                                </button>
                             </div>
                         </div>
 
-                        <div class="card business-card">
-                            <div class="business-card-header">
+                        <div class="business-card">
+                            <div class="business-header">
+                                <div class="business-logo" style="background: var(--accent-light);">⚖️</div>
                                 <div>
-                                    <h3 class="business-name">דיגיטל פלוס</h3>
-                                    <p class="business-owner">רונית לוי</p>
+                                    <div class="business-name">גולן עורכי דין</div>
+                                    <div class="business-category">משפטים</div>
                                 </div>
-                                <span class="business-category">שיווק</span>
                             </div>
-                            <p class="business-description">סוכנות שיווק דיגיטלי - קמפיינים, SEO, רשתות חברתיות ואסטרטגיה שיווקית מלאה לעסקים.</p>
-                            <div class="business-details">
-                                <span><i class="fas fa-map-marker-alt"></i> הרצליה</span>
-                                <span><i class="fas fa-phone"></i> 052-7654321</span>
-                                <a href="#"><i class="fas fa-globe"></i> אתר</a>
+                            <div class="business-owner">
+                                <i class="fas fa-user"></i> שרה גולן
+                            </div>
+                            <div class="business-contact">
+                                <button class="contact-btn primary">
+                                    <i class="fas fa-phone"></i>
+                                    התקשר
+                                </button>
+                                <button class="contact-btn secondary">
+                                    <i class="fas fa-globe"></i>
+                                    אתר
+                                </button>
                             </div>
                         </div>
 
-                        <div class="card business-card">
-                            <div class="business-card-header">
+                        <div class="business-card">
+                            <div class="business-header">
+                                <div class="business-logo" style="background: var(--secondary-light);">📱</div>
                                 <div>
-                                    <h3 class="business-name">כהן - משרד עורכי דין</h3>
-                                    <p class="business-owner">מיכל שמעון</p>
+                                    <div class="business-name">Digital Plus</div>
+                                    <div class="business-category">שיווק דיגיטלי</div>
                                 </div>
-                                <span class="business-category">עורכי דין</span>
                             </div>
-                            <p class="business-description">התמחות בדיני עבודה, חוזים מסחריים וליטיגציה אזרחית. ייעוץ ראשוני ללא עלות.</p>
-                            <div class="business-details">
-                                <span><i class="fas fa-map-marker-alt"></i> רמת גן</span>
-                                <span><i class="fas fa-phone"></i> 03-1234567</span>
+                            <div class="business-owner">
+                                <i class="fas fa-user"></i> רונית לוי
+                            </div>
+                            <div class="business-contact">
+                                <button class="contact-btn primary">
+                                    <i class="fas fa-phone"></i>
+                                    התקשר
+                                </button>
+                                <button class="contact-btn secondary">
+                                    <i class="fas fa-globe"></i>
+                                    אתר
+                                </button>
                             </div>
                         </div>
 
-                        <div class="card business-card">
-                            <div class="business-card-header">
+                        <div class="business-card">
+                            <div class="business-header">
+                                <div class="business-logo" style="background: var(--success-light);">🏥</div>
                                 <div>
-                                    <h3 class="business-name">TechSolutions</h3>
-                                    <p class="business-owner">אורי בן-דוד</p>
+                                    <div class="business-name">קליניקת אברהם</div>
+                                    <div class="business-category">פיזיותרפיה</div>
                                 </div>
-                                <span class="business-category">טכנולוגיה</span>
                             </div>
-                            <p class="business-description">פיתוח תוכנה מותאם אישית, אפליקציות מובייל ומערכות ניהול לעסקים.</p>
-                            <div class="business-details">
-                                <span><i class="fas fa-map-marker-alt"></i> חיפה</span>
-                                <a href="#"><i class="fas fa-globe"></i> אתר</a>
+                            <div class="business-owner">
+                                <i class="fas fa-user"></i> מיכל אברהם
+                            </div>
+                            <div class="business-contact">
+                                <button class="contact-btn primary">
+                                    <i class="fas fa-phone"></i>
+                                    התקשר
+                                </button>
+                                <button class="contact-btn secondary">
+                                    <i class="fas fa-globe"></i>
+                                    אתר
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -2263,71 +2094,59 @@
 
                 <!-- Messages Page -->
                 <div id="page-messages" class="page">
-                    <div class="page-header">
-                        <h1 class="page-title">הודעות</h1>
-                        <button class="new-btn">
-                            <i class="fas fa-edit"></i>
-                            שיחה חדשה
-                        </button>
-                    </div>
-
-                    <div class="card messages-layout">
-                        <div class="threads-panel">
-                            <div class="threads-header">
-                                הודעות
-                                <i class="fas fa-ellipsis-h"></i>
-                            </div>
-                            <div class="thread-item active">
-                                <div class="thread-avatar" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">רל</div>
-                                <div class="thread-info">
-                                    <div class="thread-name">רונית לוי</div>
-                                    <div class="thread-preview">מעולה, נדבר מחר!</div>
+                    <div class="messages-layout">
+                        <div class="conversations-list">
+                            <div class="conversations-header">💬 שיחות</div>
+                            <div class="conversation-item active">
+                                <div class="conversation-avatar" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">רל</div>
+                                <div class="conversation-info">
+                                    <div class="conversation-name">רונית לוי</div>
+                                    <div class="conversation-preview">היי! ראית את הפוסט על הטיול?</div>
                                 </div>
-                                <div class="thread-time">10:36</div>
+                                <div class="conversation-time">עכשיו</div>
                             </div>
-                            <div class="thread-item">
-                                <div class="thread-avatar" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">יכ</div>
-                                <div class="thread-info">
-                                    <div class="thread-name">יוסי כהן</div>
-                                    <div class="thread-preview">תודה על ההמלצה!</div>
+                            <div class="conversation-item">
+                                <div class="conversation-avatar" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">עש</div>
+                                <div class="conversation-info">
+                                    <div class="conversation-name">עומר שפירא</div>
+                                    <div class="conversation-preview">מזל טוב! 🎉</div>
                                 </div>
-                                <div class="thread-time">אתמול</div>
+                                <div class="conversation-time">2 שעות</div>
                             </div>
-                            <div class="thread-item">
-                                <div class="thread-avatar" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); color: #333;">מש</div>
-                                <div class="thread-info">
-                                    <div class="thread-name">מיכל שמעון</div>
-                                    <div class="thread-preview">בטח, שלח לי את הפרטים</div>
+                            <div class="conversation-item">
+                                <div class="conversation-avatar" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">מא</div>
+                                <div class="conversation-info">
+                                    <div class="conversation-name">מיכל אברהם</div>
+                                    <div class="conversation-preview">בטח! נדבר מחר</div>
                                 </div>
-                                <div class="thread-time">לפני 3 ימים</div>
+                                <div class="conversation-time">אתמול</div>
                             </div>
                         </div>
-                        <div class="chat-panel">
-                            <div class="chat-header">
-                                <div class="thread-avatar" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); width: 40px; height: 40px;">רל</div>
-                                <div class="chat-header-name">רונית לוי</div>
-                            </div>
+
+                        <div class="chat-area">
+                            <div class="chat-header">רונית לוי</div>
                             <div class="chat-messages">
-                                <div class="message received">
-                                    <div class="message-bubble">היי דוד! ראיתי שאתה מחפש מפתחים</div>
-                                    <div class="message-time">10:30</div>
+                                <div class="chat-message received">
+                                    <div class="message-bubble">היי דוד! מה קורה? 😊</div>
                                 </div>
-                                <div class="message sent">
-                                    <div class="message-bubble">היי רונית! כן, אנחנו מגייסים. יש לך מישהו להמליץ?</div>
-                                    <div class="message-time">10:32</div>
+                                <div class="chat-message sent">
+                                    <div class="message-bubble">היי רונית! הכל טוב, ראיתי את התמונה מאילת - איזו נוסטלגיה!</div>
                                 </div>
-                                <div class="message received">
-                                    <div class="message-bubble">בהחלט, יש לי חבר מעולה. אשלח לך את הקו"ח שלו</div>
-                                    <div class="message-time">10:35</div>
+                                <div class="chat-message received">
+                                    <div class="message-bubble">כן! יש לי עוד המון תמונות מהטיולים. צריך לארגן ערב זיכרונות 📸</div>
                                 </div>
-                                <div class="message sent">
-                                    <div class="message-bubble">מעולה, נדבר מחר! 🙏</div>
-                                    <div class="message-time">10:36</div>
+                                <div class="chat-message sent">
+                                    <div class="message-bubble">רעיון מעולה! אולי במפגש הבא?</div>
+                                </div>
+                                <div class="chat-message received">
+                                    <div class="message-bubble">בדיוק! אני אעלה פוסט על זה 🎉</div>
                                 </div>
                             </div>
-                            <div class="chat-input-area">
-                                <input type="text" class="chat-input" placeholder="כתוב הודעה...">
-                                <button class="send-btn">שלח</button>
+                            <div class="chat-input">
+                                <input type="text" placeholder="כתוב הודעה...">
+                                <button class="send-btn">
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -2335,71 +2154,75 @@
 
                 <!-- Profile Page -->
                 <div id="page-profile" class="page">
-                    <div class="card profile-page-card">
-                        <div class="profile-page-cover"></div>
-                        <div class="profile-page-content">
-                            <div class="profile-page-avatar">דכ</div>
-                            <div class="profile-page-info">
-                                <h1 class="profile-page-name">דוד כהן</h1>
-                                <p class="profile-page-headline">מנהל פיתוח | 10+ שנות ניסיון בהובלת צוותים טכנולוגיים</p>
-                                <p class="profile-page-location">תל אביב, ישראל • מחזור חדרה 2003</p>
-                                <div class="profile-page-actions">
-                                    <button class="profile-btn profile-btn-primary">
-                                        <i class="fas fa-pencil-alt"></i> עריכת פרופיל
-                                    </button>
-                                    <button class="profile-btn profile-btn-secondary">
-                                        <i class="fas fa-share"></i> שיתוף
-                                    </button>
+                    <div class="profile-hero">
+                        <div class="profile-hero-cover"></div>
+                        <div class="profile-hero-content">
+                            <div class="profile-hero-avatar">דכ</div>
+                            <div class="profile-hero-info">
+                                <div class="profile-hero-name">דוד כהן</div>
+                                <div class="profile-hero-headline">מנהל פיתוח | 10+ שנות ניסיון בהובלת צוותים טכנולוגיים</div>
+                                <div class="profile-hero-badges">
+                                    <span class="hero-badge primary">
+                                        <i class="fas fa-graduation-cap"></i>
+                                        מחזור 2003
+                                    </span>
+                                    <span class="hero-badge secondary">
+                                        <i class="fas fa-star"></i>
+                                        חבר פעיל
+                                    </span>
                                 </div>
                             </div>
+                            <button class="profile-edit-btn">
+                                <i class="fas fa-pen"></i>
+                                ערוך פרופיל
+                            </button>
                         </div>
                     </div>
 
-                    <div class="card">
-                        <div class="profile-section">
-                            <h2 class="profile-section-title">אודות</h2>
-                            <p class="profile-about">מנהל פיתוח עם 10 שנות ניסיון בהובלת צוותים טכנולוגיים. מתמחה בבניית צוותים, ארכיטקטורת מערכות ופיתוח מוצרים מ-0 ל-1.
+                    <div class="profile-section">
+                        <div class="profile-section-title">
+                            <i class="fas fa-user"></i>
+                            אודות
+                        </div>
+                        <p style="color: var(--text-secondary); line-height: 1.8;">
+                            בוגר תיכון חדרה מחזור 2003. עובד בתחום הטכנולוגיה מעל 15 שנה, כיום מנהל פיתוח בחברת סטארטאפ.
+                            אוהב לרקוד סלסה, לטייל ולפגוש חברים מהמחזור! 🎓
+                        </p>
+                    </div>
 
-תחומי התמחות: React, Node.js, AWS, ניהול צוותים, Agile
-
-פתוח לשיתופי פעולה ולעזור לבוגרי המחזור בנושאים טכנולוגיים! 🚀</p>
+                    <div class="profile-section">
+                        <div class="profile-section-title">
+                            <i class="fas fa-briefcase"></i>
+                            ניסיון תעסוקתי
+                        </div>
+                        <div style="padding: 12px 0; border-bottom: 1px solid var(--border);">
+                            <div style="font-weight: 600;">מנהל פיתוח</div>
+                            <div style="color: var(--text-secondary); font-size: 14px;">TechCorp • 2020 - היום</div>
+                        </div>
+                        <div style="padding: 12px 0;">
+                            <div style="font-weight: 600;">ראש צוות פיתוח</div>
+                            <div style="color: var(--text-secondary); font-size: 14px;">StartupXYZ • 2015 - 2020</div>
                         </div>
                     </div>
 
-                    <div class="card">
-                        <div class="profile-section">
-                            <h2 class="profile-section-title">עריכת פרטים</h2>
-                            <div class="profile-form">
-                                <div class="form-group">
-                                    <label class="form-label">שם פרטי</label>
-                                    <input type="text" class="form-input" value="דוד">
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">שם משפחה</label>
-                                    <input type="text" class="form-input" value="כהן">
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">תפקיד נוכחי</label>
-                                    <input type="text" class="form-input" value="מנהל פיתוח">
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">עיר</label>
-                                    <input type="text" class="form-input" value="תל אביב">
-                                </div>
-                                <div class="form-group full-width">
-                                    <label class="form-label">LinkedIn</label>
-                                    <input type="url" class="form-input" placeholder="https://linkedin.com/in/...">
-                                </div>
-                                <div class="form-group full-width">
-                                    <label class="form-label">במה אני יכול לעזור</label>
-                                    <textarea class="form-input form-textarea">ייעוץ טכנולוגי, גיוס מפתחים, אסטרטגיית מוצר, code review</textarea>
-                                </div>
-                                <div class="form-group full-width">
-                                    <label class="form-label">מה אני מחפש</label>
-                                    <textarea class="form-input form-textarea">שיתופי פעולה עם סטארטאפים, הזדמנויות השקעה, נטוורקינג</textarea>
-                                </div>
+                    <div class="profile-section">
+                        <div class="profile-section-title">
+                            <i class="fas fa-envelope"></i>
+                            פרטי קשר
+                        </div>
+                        <div style="display: grid; gap: 12px;">
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <i class="fas fa-envelope" style="color: var(--primary); width: 20px;"></i>
+                                <span>david.cohen@email.com</span>
                             </div>
-                            <button class="save-btn">שמירת שינויים</button>
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <i class="fas fa-phone" style="color: var(--primary); width: 20px;"></i>
+                                <span>050-1234567</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <i class="fab fa-linkedin" style="color: var(--primary); width: 20px;"></i>
+                                <span>linkedin.com/in/davidcohen</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -2407,56 +2230,90 @@
 
             <!-- Right Sidebar -->
             <aside class="right-sidebar">
-                <div class="sidebar-card">
-                    <div class="sidebar-card-header">
+                <!-- Birthdays -->
+                <div class="birthdays-card">
+                    <div class="card-header">
+                        <i class="fas fa-birthday-cake" style="color: var(--secondary);"></i>
+                        ימי הולדת השבוע
+                    </div>
+                    <div class="birthday-item">
+                        <div class="birthday-avatar" style="background: linear-gradient(135deg, #f5576c 0%, #f093fb 100%);">לב</div>
+                        <div class="birthday-info">
+                            <div class="birthday-name">לירון ביטון</div>
+                            <div class="birthday-date">היום! 🎂</div>
+                        </div>
+                        <button class="birthday-btn">🎉 ברך</button>
+                    </div>
+                    <div class="birthday-item" style="background: var(--bg-primary);">
+                        <div class="birthday-avatar" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">נר</div>
+                        <div class="birthday-info">
+                            <div class="birthday-name">נועה רביב</div>
+                            <div class="birthday-date">מחר</div>
+                        </div>
+                        <button class="birthday-btn">🎉 ברך</button>
+                    </div>
+                </div>
+
+                <!-- Map Preview -->
+                <div class="map-card">
+                    <div class="card-header">
+                        <i class="fas fa-map-marked-alt" style="color: var(--primary);"></i>
+                        איפה אנחנו היום
+                    </div>
+                    <div class="map-preview">
+                        <i class="fas fa-globe-americas"></i>
+                        <span>לחץ לצפייה במפה</span>
+                    </div>
+                    <div class="map-stats">
+                        <div class="map-stat">
+                            <div class="map-stat-value">12</div>
+                            <div class="map-stat-label">ערים</div>
+                        </div>
+                        <div class="map-stat">
+                            <div class="map-stat-value">5</div>
+                            <div class="map-stat-label">מדינות</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Upcoming Events -->
+                <div class="events-preview">
+                    <div class="card-header">
+                        <i class="fas fa-calendar-alt" style="color: var(--accent);"></i>
                         אירועים קרובים
-                        <i class="fas fa-info-circle"></i>
                     </div>
-                    <div class="event-item" onclick="showPage('events')">
-                        <div class="event-item-date">15 דצמבר</div>
-                        <div class="event-item-title">מפגש מחזור - 20 שנה!</div>
-                        <div class="event-item-attendees">32 מאשרים הגעה</div>
+                    <div class="event-item">
+                        <div class="event-date">
+                            <div class="event-day">15</div>
+                            <div class="event-month">דצמ</div>
+                        </div>
+                        <div class="event-details">
+                            <div class="event-title">🍻 מפגש חברים</div>
+                            <div class="event-meta">
+                                <i class="fas fa-users"></i>
+                                15 מגיעים
+                            </div>
+                        </div>
                     </div>
-                    <div class="event-item" onclick="showPage('events')">
-                        <div class="event-item-date">20 דצמבר</div>
-                        <div class="event-item-title">נטוורקינג בוקר</div>
-                        <div class="event-item-attendees">15 מאשרים הגעה</div>
+                    <div class="event-item">
+                        <div class="event-date">
+                            <div class="event-day">28</div>
+                            <div class="event-month">דצמ</div>
+                        </div>
+                        <div class="event-details">
+                            <div class="event-title">🎄 מסיבת סוף שנה</div>
+                            <div class="event-meta">
+                                <i class="fas fa-users"></i>
+                                30 מגיעים
+                            </div>
+                        </div>
                     </div>
-                    <div class="see-all-link" onclick="showPage('events')">הצג את כל האירועים</div>
                 </div>
 
-                <div class="sidebar-card">
-                    <div class="sidebar-card-header">
-                        אנשים שאולי תכיר
-                    </div>
-                    <div class="member-item">
-                        <div class="member-avatar" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">נג</div>
-                        <div class="member-info">
-                            <div class="member-name">נועה גולן</div>
-                            <div class="member-headline">Product Manager @ Wix</div>
-                        </div>
-                        <button class="connect-btn">התחבר</button>
-                    </div>
-                    <div class="member-item">
-                        <div class="member-avatar" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">דל</div>
-                        <div class="member-info">
-                            <div class="member-name">דניאל לוי</div>
-                            <div class="member-headline">Data Scientist @ Google</div>
-                        </div>
-                        <button class="connect-btn">התחבר</button>
-                    </div>
-                    <div class="see-all-link">הצג עוד</div>
-                </div>
-
-                <div class="footer-links">
-                    <a href="#">אודות</a> •
-                    <a href="#">תנאי שימוש</a> •
-                    <a href="#">פרטיות</a> •
-                    <a href="#">עזרה</a>
-                    <div class="footer-disclaimer">
-                        AlumniHub אינה קשורה רשמית לבית הספר.<br>
-                        הפלטפורמה מופעלת באופן עצמאי.
-                    </div>
+                <!-- Disclaimer -->
+                <div class="disclaimer">
+                    AlumniHub © 2024<br>
+                    <a href="#">תנאי שימוש</a> • <a href="#">פרטיות</a>
                 </div>
             </aside>
         </div>
@@ -2472,19 +2329,27 @@
             // Show selected page
             document.getElementById('page-' + pageId).classList.add('active');
 
-            // Update top nav
-            document.querySelectorAll('.top-nav .nav-item').forEach(item => {
+            // Update nav items
+            document.querySelectorAll('.nav-item').forEach(item => {
                 item.classList.remove('active');
             });
 
-            // Update sidebar nav
-            document.querySelectorAll('.sidebar-nav-item').forEach(item => {
+            // Update nav menu items
+            document.querySelectorAll('.nav-menu-item').forEach(item => {
                 item.classList.remove('active');
             });
 
-            // Scroll to top
-            window.scrollTo(0, 0);
+            // Find and activate the clicked nav item
+            event.currentTarget.classList.add('active');
         }
+
+        // Filter buttons functionality
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
     </script>
 </body>
 </html>
